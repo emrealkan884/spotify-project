@@ -8,7 +8,7 @@ import java.util.UUID;
 public interface AlbumService {
     Album add(Album request);
 
-    Album update(Album request);
+    Album update(UUID id, Album request);
 
     void delete(UUID id);
 

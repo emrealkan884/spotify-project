@@ -20,7 +20,7 @@ public class AlbumServiceImpl implements AlbumService {
     }
 
     @Override
-    public Album update(Album request) {
+    public Album update(UUID id, Album request) {
         return null;
     }
 
