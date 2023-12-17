@@ -1,7 +1,11 @@
 package com.berkemre.spotifyproject.business.concretes;
 
 import com.berkemre.spotifyproject.business.abstracts.MusicService;
-import com.berkemre.spotifyproject.entities.Music;
+import com.berkemre.spotifyproject.business.dtos.music.requests.MusicAddRequest;
+import com.berkemre.spotifyproject.business.dtos.music.requests.MusicUpdateRequest;
+import com.berkemre.spotifyproject.business.dtos.music.responses.MusicAddResponse;
+import com.berkemre.spotifyproject.business.dtos.music.responses.MusicGetResponse;
+import com.berkemre.spotifyproject.business.dtos.music.responses.MusicUpdateResponse;
 import com.berkemre.spotifyproject.repositories.MusicRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -15,12 +19,12 @@ public class MusicServiceImpl implements MusicService {
     private final MusicRepository musicRepository;
 
     @Override
-    public Music add(Music request) {
+    public MusicAddResponse add(MusicAddRequest request) {
         return null;
     }
 
     @Override
-    public Music update(UUID id, Music request) {
+    public MusicUpdateResponse update(UUID id, MusicUpdateRequest request) {
         return null;
     }
 
@@ -30,12 +34,12 @@ public class MusicServiceImpl implements MusicService {
     }
 
     @Override
-    public Music getById(UUID id) {
+    public MusicGetResponse getById(UUID id) {
         return null;
     }
 
     @Override
-    public List<Music> getAll() {
+    public List<MusicGetResponse> getAll() {
         return null;
     }
 }

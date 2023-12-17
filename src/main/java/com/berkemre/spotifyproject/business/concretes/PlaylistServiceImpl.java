@@ -1,7 +1,11 @@
 package com.berkemre.spotifyproject.business.concretes;
 
 import com.berkemre.spotifyproject.business.abstracts.PlaylistService;
-import com.berkemre.spotifyproject.entities.Playlist;
+import com.berkemre.spotifyproject.business.dtos.playlist.requests.PlaylistAddRequest;
+import com.berkemre.spotifyproject.business.dtos.playlist.requests.PlaylistUpdateRequest;
+import com.berkemre.spotifyproject.business.dtos.playlist.responses.PlaylistAddResponse;
+import com.berkemre.spotifyproject.business.dtos.playlist.responses.PlaylistGetResponse;
+import com.berkemre.spotifyproject.business.dtos.playlist.responses.PlaylistUpdateResponse;
 import com.berkemre.spotifyproject.repositories.PlaylistRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -15,12 +19,12 @@ public class PlaylistServiceImpl implements PlaylistService {
     private final PlaylistRepository playlistRepository;
 
     @Override
-    public Playlist add(Playlist request) {
+    public PlaylistAddResponse add(PlaylistAddRequest request) {
         return null;
     }
 
     @Override
-    public Playlist update(UUID id, Playlist request) {
+    public PlaylistUpdateResponse update(UUID id, PlaylistUpdateRequest request) {
         return null;
     }
 
@@ -30,12 +34,12 @@ public class PlaylistServiceImpl implements PlaylistService {
     }
 
     @Override
-    public Playlist getById(UUID id) {
+    public PlaylistGetResponse getById(UUID id) {
         return null;
     }
 
     @Override
-    public List<Playlist> getAll() {
+    public List<PlaylistGetResponse> getAll() {
         return null;
     }
 }

@@ -1,7 +1,11 @@
 package com.berkemre.spotifyproject.business.concretes;
 
 import com.berkemre.spotifyproject.business.abstracts.ArtistService;
-import com.berkemre.spotifyproject.entities.Artist;
+import com.berkemre.spotifyproject.business.dtos.artist.requests.ArtistAddRequest;
+import com.berkemre.spotifyproject.business.dtos.artist.requests.ArtistUpdateRequest;
+import com.berkemre.spotifyproject.business.dtos.artist.responses.ArtistAddResponse;
+import com.berkemre.spotifyproject.business.dtos.artist.responses.ArtistGetResponse;
+import com.berkemre.spotifyproject.business.dtos.artist.responses.ArtistUpdateResponse;
 import com.berkemre.spotifyproject.repositories.ArtistRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -13,14 +17,14 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class ArtistServiceImpl implements ArtistService {
     private final ArtistRepository artistRepository;
-
+    
     @Override
-    public Artist add(Artist request) {
+    public ArtistAddResponse add(ArtistAddRequest request) {
         return null;
     }
 
     @Override
-    public Artist update(UUID id, Artist request) {
+    public ArtistUpdateResponse update(UUID id, ArtistUpdateRequest request) {
         return null;
     }
 
@@ -30,12 +34,12 @@ public class ArtistServiceImpl implements ArtistService {
     }
 
     @Override
-    public Artist getById(UUID id) {
+    public ArtistGetResponse getById(UUID id) {
         return null;
     }
 
     @Override
-    public List<Artist> getAll() {
+    public List<ArtistGetResponse> getAll() {
         return null;
     }
 }

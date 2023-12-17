@@ -1,7 +1,11 @@
 package com.berkemre.spotifyproject.business.concretes;
 
 import com.berkemre.spotifyproject.business.abstracts.AlbumService;
-import com.berkemre.spotifyproject.entities.Album;
+import com.berkemre.spotifyproject.business.dtos.album.requests.AlbumAddRequest;
+import com.berkemre.spotifyproject.business.dtos.album.requests.AlbumUpdateRequest;
+import com.berkemre.spotifyproject.business.dtos.album.responses.AlbumAddResponse;
+import com.berkemre.spotifyproject.business.dtos.album.responses.AlbumGetResponse;
+import com.berkemre.spotifyproject.business.dtos.album.responses.AlbumUpdateResponse;
 import com.berkemre.spotifyproject.repositories.AlbumRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -15,12 +19,12 @@ public class AlbumServiceImpl implements AlbumService {
     private final AlbumRepository albumRepository;
 
     @Override
-    public Album add(Album request) {
+    public AlbumAddResponse add(AlbumAddRequest request) {
         return null;
     }
 
     @Override
-    public Album update(UUID id, Album request) {
+    public AlbumUpdateResponse update(UUID id, AlbumUpdateRequest request) {
         return null;
     }
 
@@ -30,12 +34,12 @@ public class AlbumServiceImpl implements AlbumService {
     }
 
     @Override
-    public Album getById(UUID id) {
+    public AlbumGetResponse getById(UUID id) {
         return null;
     }
 
     @Override
-    public List<Album> getAll() {
+    public List<AlbumGetResponse> getAll() {
         return null;
     }
 }

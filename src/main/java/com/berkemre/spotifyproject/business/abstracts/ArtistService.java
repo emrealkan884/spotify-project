@@ -1,18 +1,22 @@
 package com.berkemre.spotifyproject.business.abstracts;
 
-import com.berkemre.spotifyproject.entities.Artist;
+import com.berkemre.spotifyproject.business.dtos.artist.requests.ArtistAddRequest;
+import com.berkemre.spotifyproject.business.dtos.artist.requests.ArtistUpdateRequest;
+import com.berkemre.spotifyproject.business.dtos.artist.responses.ArtistAddResponse;
+import com.berkemre.spotifyproject.business.dtos.artist.responses.ArtistGetResponse;
+import com.berkemre.spotifyproject.business.dtos.artist.responses.ArtistUpdateResponse;
 
 import java.util.List;
 import java.util.UUID;
 
 public interface ArtistService {
-    Artist add(Artist request);
+    ArtistAddResponse add(ArtistAddRequest request);
 
-    Artist update(UUID id, Artist request);
+    ArtistUpdateResponse update(UUID id, ArtistUpdateRequest request);
 
     void delete(UUID id);
 
-    Artist getById(UUID id);
+    ArtistGetResponse getById(UUID id);
 
-    List<Artist> getAll();
+    List<ArtistGetResponse> getAll();
 }
