@@ -21,4 +21,6 @@ public interface MusicService {
   List<MusicGetResponse> getAll();
 
   List<Music> getForByIdsNative(List<UUID> ids);
+
+  Music getForByIdNative(UUID id);
 }

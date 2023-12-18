@@ -20,5 +20,7 @@ public interface ArtistService {
 
   List<ArtistGetResponse> getAll();
 
+  List<Artist> getForByIdsNative(List<UUID> ids);
+
   Artist getForByIdNative(UUID id);
 }

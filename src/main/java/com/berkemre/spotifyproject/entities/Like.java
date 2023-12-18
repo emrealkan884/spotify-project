@@ -1,7 +1,7 @@
 package com.berkemre.spotifyproject.entities;
 
 import jakarta.persistence.*;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.UUID;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -19,7 +19,7 @@ public class Like {
   @GeneratedValue(strategy = GenerationType.UUID)
   private UUID id;
 
-  private LocalDateTime likeDateTime;
+  private LocalDate date = LocalDate.now();
 
   @ManyToOne
   @JoinColumn(name = "user_id")

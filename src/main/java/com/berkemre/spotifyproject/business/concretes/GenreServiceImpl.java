@@ -1,6 +1,7 @@
 package com.berkemre.spotifyproject.business.concretes;
 
 import com.berkemre.spotifyproject.business.abstracts.GenreService;
+import com.berkemre.spotifyproject.business.abstracts.MusicService;
 import com.berkemre.spotifyproject.business.dtos.genre.requests.GenreAddRequest;
 import com.berkemre.spotifyproject.business.dtos.genre.requests.GenreUpdateRequest;
 import com.berkemre.spotifyproject.business.dtos.genre.responses.GenreAddResponse;
@@ -17,10 +18,19 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class GenreServiceImpl implements GenreService {
   private final GenreRepository genreRepository;
+  private final MusicService musicService;
 
   @Override
   public GenreAddResponse add(GenreAddRequest request) {
-    return null;
+    Genre genre = Genre.builder().name(request.getName()).build();
+    genre = genreRepository.save(genre);
+    GenreAddResponse genreAddResponse =
+        GenreAddResponse.builder()
+            .musics(genre.getMusics())
+            .id(genre.getId())
+            .name(genre.getName())
+            .build();
+    return genreAddResponse;
   }
 
   @Override

@@ -45,4 +45,9 @@ public class MusicServiceImpl implements MusicService {
   public List<Music> getForByIdsNative(List<UUID> ids) {
     return musicRepository.getForByIdsNative(ids);
   }
+
+  @Override
+  public Music getForByIdNative(UUID id) {
+    return musicRepository.getForByIdNative(id);
+  }
 }

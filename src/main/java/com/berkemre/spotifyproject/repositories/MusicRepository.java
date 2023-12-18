@@ -13,4 +13,7 @@ public interface MusicRepository extends JpaRepository<Music, UUID> {
 
   @Query(value = "SELECT * FROM musics WHERE id IN :ids", nativeQuery = true)
   List<Music> getForByIdsNative(@Param("ids") List<UUID> ids);
+
+  @Query(value = "Select * from musics WHERE id = :id", nativeQuery = true)
+  Music getForByIdNative(@Param("id") UUID id);
 }

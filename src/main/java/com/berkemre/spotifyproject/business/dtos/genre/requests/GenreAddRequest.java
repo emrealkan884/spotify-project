@@ -10,8 +10,5 @@ import lombok.NoArgsConstructor;
 @Builder
 @Data
 public class GenreAddRequest {
-  private String username;
-  private String firstName;
-  private String lastName;
-  private String password;
+  private String name;
 }

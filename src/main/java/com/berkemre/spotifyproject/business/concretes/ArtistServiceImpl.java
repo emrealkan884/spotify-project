@@ -74,6 +74,11 @@ public class ArtistServiceImpl implements ArtistService {
   }
 
   @Override
+  public List<Artist> getForByIdsNative(List<UUID> ids) {
+    return artistRepository.getForByIdsNative(ids);
+  }
+
+  @Override
   public Artist getForByIdNative(UUID id) {
     checkIfArtistExists(id);
     return artistRepository.getForByIdNative(id);
