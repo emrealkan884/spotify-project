@@ -1,7 +1,6 @@
 package com.berkemre.spotifyproject.business.dtos.music.responses;
 
 import java.time.LocalDate;
-import java.util.UUID;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -12,8 +11,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class MusicGetResponse {
-
-  private UUID id;
 
   private String name;
 
@@ -26,4 +23,8 @@ public class MusicGetResponse {
   private String photo;
 
   private float duration;
+
+  private String artistName;
+
+  private String genreName;
 }

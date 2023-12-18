@@ -1,6 +1,5 @@
-package com.berkemre.spotifyproject.business.dtos.artist.responses;
+package com.berkemre.spotifyproject.business.dtos.like.responses;
 
-import java.util.UUID;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -10,7 +9,6 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ArtistAddResponse {
-  private UUID id;
-  private String name;
+public class LikeAddResponse {
+  private String username;
 }

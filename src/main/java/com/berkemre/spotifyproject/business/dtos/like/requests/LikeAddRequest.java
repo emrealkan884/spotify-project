@@ -1,4 +1,4 @@
-package com.berkemre.spotifyproject.business.dtos.artist.requests;
+package com.berkemre.spotifyproject.business.dtos.like.requests;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,6 +9,4 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 @Data
-public class ArtistUpdateRequest {
-  private String name;
-}
+public class LikeAddRequest {}

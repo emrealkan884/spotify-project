@@ -1,35 +1,31 @@
 package com.berkemre.spotifyproject.entities;
 
 import jakarta.persistence.*;
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
+import java.time.LocalDateTime;
 import java.util.UUID;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
 @Entity
-@Table(name = "playlists")
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
 @Builder
-public class Playlist {
-
+@Table(name = "likes")
+public class Like {
   @Id
   @GeneratedValue(strategy = GenerationType.UUID)
   private UUID id;
 
-  private String name;
-
-  private LocalDate createdDate;
-
-  @ManyToMany(mappedBy = "playlists")
-  private List<Music> musics = new ArrayList<>();
+  private LocalDateTime likeDateTime;
 
   @ManyToOne
   @JoinColumn(name = "user_id")
   private User user;
+
+  @ManyToOne
+  @JoinColumn(name = "music_id")
+  private Music music;
 }

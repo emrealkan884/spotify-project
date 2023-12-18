@@ -1,4 +1,4 @@
-package com.berkemre.spotifyproject.business.dtos.artist.responses;
+package com.berkemre.spotifyproject.business.dtos.like.responses;
 
 import com.berkemre.spotifyproject.entities.Album;
 import java.util.List;
@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ArtistGetResponse {
+public class LikeGetResponse {
   private List<Album> albums;
-  private String name;
+  private String username;
 }

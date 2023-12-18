@@ -1,8 +1,6 @@
 package com.berkemre.spotifyproject.entities;
 
 import jakarta.persistence.*;
-import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import lombok.AllArgsConstructor;
@@ -10,26 +8,22 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
 @Entity
-@Table(name = "playlists")
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
 @Builder
-public class Playlist {
-
+@Table(name = "genres")
+public class Genre {
   @Id
   @GeneratedValue(strategy = GenerationType.UUID)
   private UUID id;
 
   private String name;
 
-  private LocalDate createdDate;
+  @OneToMany(mappedBy = "genre")
+  private List<Music> musics;
 
-  @ManyToMany(mappedBy = "playlists")
-  private List<Music> musics = new ArrayList<>();
-
-  @ManyToOne
-  @JoinColumn(name = "user_id")
-  private User user;
+  @OneToMany(mappedBy = "genre")
+  private List<Artist> artists;
 }

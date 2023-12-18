@@ -18,5 +18,7 @@ public class MusicAddResponse {
 
   private String link;
 
-  private String artistUserName;
+  private String artistName;
+
+  private String genreName;
 }

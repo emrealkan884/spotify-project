@@ -1,47 +1,50 @@
 package com.berkemre.spotifyproject.api.controllers;
 
 import com.berkemre.spotifyproject.business.abstracts.MusicService;
-import com.berkemre.spotifyproject.entities.Music;
+import com.berkemre.spotifyproject.business.dtos.music.requests.MusicAddRequest;
+import com.berkemre.spotifyproject.business.dtos.music.requests.MusicUpdateRequest;
+import com.berkemre.spotifyproject.business.dtos.music.responses.MusicAddResponse;
+import com.berkemre.spotifyproject.business.dtos.music.responses.MusicGetResponse;
+import com.berkemre.spotifyproject.business.dtos.music.responses.MusicUpdateResponse;
+import java.util.List;
+import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
-import java.util.UUID;
 
 @RequestMapping("/api/musics")
 @RestController
 @RequiredArgsConstructor
 public class MusicsController {
-    private final MusicService musicService;
+  private final MusicService musicService;
 
-    @GetMapping
-    public List<Music> getAll() {
-        return musicService.getAll();
-    }
+  @GetMapping
+  public List<MusicGetResponse> getAll() {
+    return musicService.getAll();
+  }
 
-    @GetMapping("/{id}")
-    public Music getById(@PathVariable UUID id) {
-        return musicService.getById(id);
-    }
+  @GetMapping("/{id}")
+  public MusicGetResponse getById(@PathVariable UUID id) {
+    return musicService.getById(id);
+  }
 
-    @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    public Music add(@RequestBody Music request) {
-        return musicService.add(request);
-    }
+  @PostMapping
+  @ResponseStatus(HttpStatus.CREATED)
+  public MusicAddResponse add(@RequestBody MusicAddRequest request) {
+    return musicService.add(request);
+  }
 
-    @PutMapping("/{id}")
-    public Music update(
-            @PathVariable UUID id, @RequestBody Music request) {
+  @PutMapping("/{id}")
+  public MusicUpdateResponse update(
+      @PathVariable UUID id, @RequestBody MusicUpdateRequest request) {
 
-        return musicService.update(id, request);
-    }
+    return musicService.update(id, request);
+  }
 
-    @DeleteMapping("/{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void delete(@PathVariable UUID id) {
+  @DeleteMapping("/{id}")
+  @ResponseStatus(HttpStatus.NO_CONTENT)
+  public void delete(@PathVariable UUID id) {
 
-        musicService.delete(id);
-    }
+    musicService.delete(id);
+  }
 }

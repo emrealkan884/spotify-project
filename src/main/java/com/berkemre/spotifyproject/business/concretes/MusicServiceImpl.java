@@ -6,40 +6,43 @@ import com.berkemre.spotifyproject.business.dtos.music.requests.MusicUpdateReque
 import com.berkemre.spotifyproject.business.dtos.music.responses.MusicAddResponse;
 import com.berkemre.spotifyproject.business.dtos.music.responses.MusicGetResponse;
 import com.berkemre.spotifyproject.business.dtos.music.responses.MusicUpdateResponse;
+import com.berkemre.spotifyproject.entities.Music;
 import com.berkemre.spotifyproject.repositories.MusicRepository;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.UUID;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
 public class MusicServiceImpl implements MusicService {
-    private final MusicRepository musicRepository;
+  private final MusicRepository musicRepository;
 
-    @Override
-    public MusicAddResponse add(MusicAddRequest request) {
-        return null;
-    }
+  @Override
+  public MusicAddResponse add(MusicAddRequest request) {
+    return null;
+  }
 
-    @Override
-    public MusicUpdateResponse update(UUID id, MusicUpdateRequest request) {
-        return null;
-    }
+  @Override
+  public MusicUpdateResponse update(UUID id, MusicUpdateRequest request) {
+    return null;
+  }
 
-    @Override
-    public void delete(UUID id) {
+  @Override
+  public void delete(UUID id) {}
 
-    }
+  @Override
+  public MusicGetResponse getById(UUID id) {
+    return null;
+  }
 
-    @Override
-    public MusicGetResponse getById(UUID id) {
-        return null;
-    }
+  @Override
+  public List<MusicGetResponse> getAll() {
+    return null;
+  }
 
-    @Override
-    public List<MusicGetResponse> getAll() {
-        return null;
-    }
+  @Override
+  public List<Music> getForByIdsNative(List<UUID> ids) {
+    return musicRepository.getForByIdsNative(ids);
+  }
 }

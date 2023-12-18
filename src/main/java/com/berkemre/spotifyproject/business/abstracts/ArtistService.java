@@ -5,18 +5,20 @@ import com.berkemre.spotifyproject.business.dtos.artist.requests.ArtistUpdateReq
 import com.berkemre.spotifyproject.business.dtos.artist.responses.ArtistAddResponse;
 import com.berkemre.spotifyproject.business.dtos.artist.responses.ArtistGetResponse;
 import com.berkemre.spotifyproject.business.dtos.artist.responses.ArtistUpdateResponse;
-
+import com.berkemre.spotifyproject.entities.Artist;
 import java.util.List;
 import java.util.UUID;
 
 public interface ArtistService {
-    ArtistAddResponse add(ArtistAddRequest request);
+  ArtistAddResponse add(ArtistAddRequest request);
 
-    ArtistUpdateResponse update(UUID id, ArtistUpdateRequest request);
+  ArtistUpdateResponse update(UUID id, ArtistUpdateRequest request);
 
-    void delete(UUID id);
+  void delete(UUID id);
 
-    ArtistGetResponse getById(UUID id);
+  ArtistGetResponse getById(UUID id);
 
-    List<ArtistGetResponse> getAll();
+  List<ArtistGetResponse> getAll();
+
+  Artist getForByIdNative(UUID id);
 }

@@ -1,3 +1,17 @@
 package com.berkemre.spotifyproject.business.dtos.playlist.responses;
 
-public class PlaylistGetResponse {}
+import com.berkemre.spotifyproject.entities.Music;
+import java.util.List;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
+public class PlaylistGetResponse {
+  private String name;
+  private List<Music> musics;
+}
