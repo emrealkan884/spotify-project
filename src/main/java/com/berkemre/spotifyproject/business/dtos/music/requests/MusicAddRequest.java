@@ -20,7 +20,5 @@ public class MusicAddRequest {
 
   private float duration;
 
-  private UUID artistId;
-
-  private UUID genreId;
+  private UUID albumId;
 }

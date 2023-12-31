@@ -2,7 +2,6 @@ package com.berkemre.spotifyproject.business.concretes;
 
 import com.berkemre.spotifyproject.business.abstracts.AlbumService;
 import com.berkemre.spotifyproject.business.abstracts.ArtistService;
-import com.berkemre.spotifyproject.business.abstracts.MusicService;
 import com.berkemre.spotifyproject.business.dtos.album.requests.AlbumAddRequest;
 import com.berkemre.spotifyproject.business.dtos.album.requests.AlbumUpdateRequest;
 import com.berkemre.spotifyproject.business.dtos.album.responses.AlbumAddResponse;
@@ -22,7 +21,6 @@ import org.springframework.stereotype.Service;
 public class AlbumServiceImpl implements AlbumService {
   private final AlbumRepository albumRepository;
   private final ArtistService artistService;
-  private final MusicService musicService;
 
   @Override
   public AlbumAddResponse add(AlbumAddRequest request) {
@@ -30,7 +28,6 @@ public class AlbumServiceImpl implements AlbumService {
         Album.builder()
             .name(request.getName())
             .artist(artistService.getForByIdNative(request.getArtistId()))
-            .musics(musicService.getForByIdsNative(request.getMusicsId()))
             .releaseDate(LocalDate.now())
             .build();
     album = albumRepository.save(album);
@@ -92,6 +89,12 @@ public class AlbumServiceImpl implements AlbumService {
       responses.add(albumGetResponse);
     }
     return responses;
+  }
+
+  @Override
+  public Album getForByIdNative(UUID id) {
+    checkIfAlbumExists(id);
+    return albumRepository.getForByIdNative(id);
   }
 
   private void checkIfAlbumExists(UUID id) {

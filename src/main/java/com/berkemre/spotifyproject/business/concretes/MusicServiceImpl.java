@@ -1,5 +1,6 @@
 package com.berkemre.spotifyproject.business.concretes;
 
+import com.berkemre.spotifyproject.business.abstracts.AlbumService;
 import com.berkemre.spotifyproject.business.abstracts.MusicService;
 import com.berkemre.spotifyproject.business.dtos.music.requests.MusicAddRequest;
 import com.berkemre.spotifyproject.business.dtos.music.requests.MusicUpdateRequest;
@@ -17,10 +18,29 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class MusicServiceImpl implements MusicService {
   private final MusicRepository musicRepository;
+  private final AlbumService albumService;
 
   @Override
   public MusicAddResponse add(MusicAddRequest request) {
-    return null;
+    Music music =
+        Music.builder()
+            .name(request.getName())
+            .link(request.getLink())
+            .album(albumService.getForByIdNative(request.getAlbumId()))
+            .duration(request.getDuration())
+            .photo(request.getPhoto())
+            .genre(albumService.getForByIdNative(request.getAlbumId()).getArtist().getGenre())
+            .build();
+    music = musicRepository.save(music);
+    MusicAddResponse musicAddResponse =
+        MusicAddResponse.builder()
+            .id(music.getId())
+            .name(music.getName())
+            .artistName(music.getAlbum().getArtist().getName())
+            .genreName(music.getGenre().getName())
+            .link(music.getLink())
+            .build();
+    return musicAddResponse;
   }
 
   @Override

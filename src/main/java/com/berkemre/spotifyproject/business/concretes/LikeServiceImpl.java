@@ -20,7 +20,7 @@ import org.springframework.stereotype.Service;
 public class LikeServiceImpl implements LikeService {
   private final LikeRepository likeRepository;
   private final UserService userService;
-  private final MusicService musicService;
+  private MusicService musicService;
 
   @Override
   public LikeAddResponse add(LikeAddRequest request) {
