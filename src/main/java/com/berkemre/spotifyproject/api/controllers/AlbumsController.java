@@ -1,11 +1,11 @@
 package com.berkemre.spotifyproject.api.controllers;
 
 import com.berkemre.spotifyproject.business.abstracts.AlbumService;
-import com.berkemre.spotifyproject.business.dtos.album.requests.AlbumAddRequest;
-import com.berkemre.spotifyproject.business.dtos.album.requests.AlbumUpdateRequest;
-import com.berkemre.spotifyproject.business.dtos.album.responses.AlbumAddResponse;
-import com.berkemre.spotifyproject.business.dtos.album.responses.AlbumGetResponse;
-import com.berkemre.spotifyproject.business.dtos.album.responses.AlbumUpdateResponse;
+import com.berkemre.spotifyproject.business.dtos.album.requests.AddAlbumRequest;
+import com.berkemre.spotifyproject.business.dtos.album.requests.UpdateAlbumRequest;
+import com.berkemre.spotifyproject.business.dtos.album.responses.AddAlbumResponse;
+import com.berkemre.spotifyproject.business.dtos.album.responses.GetAlbumResponse;
+import com.berkemre.spotifyproject.business.dtos.album.responses.UpdateAlbumResponse;
 import java.util.List;
 import java.util.UUID;
 import lombok.RequiredArgsConstructor;
@@ -19,24 +19,24 @@ public class AlbumsController {
   private final AlbumService albumService;
 
   @GetMapping
-  public List<AlbumGetResponse> getAll() {
+  public List<GetAlbumResponse> getAll() {
     return albumService.getAll();
   }
 
   @GetMapping("/{id}")
-  public AlbumGetResponse getById(@PathVariable UUID id) {
+  public GetAlbumResponse getById(@PathVariable UUID id) {
     return albumService.getById(id);
   }
 
   @PostMapping
   @ResponseStatus(HttpStatus.CREATED)
-  public AlbumAddResponse add(@RequestBody AlbumAddRequest request) {
+  public AddAlbumResponse add(@RequestBody AddAlbumRequest request) {
     return albumService.add(request);
   }
 
   @PutMapping("/{id}")
-  public AlbumUpdateResponse update(
-      @PathVariable UUID id, @RequestBody AlbumUpdateRequest request) {
+  public UpdateAlbumResponse update(
+      @PathVariable UUID id, @RequestBody UpdateAlbumRequest request) {
 
     return albumService.update(id, request);
   }

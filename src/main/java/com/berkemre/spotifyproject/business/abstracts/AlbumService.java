@@ -1,24 +1,24 @@
 package com.berkemre.spotifyproject.business.abstracts;
 
-import com.berkemre.spotifyproject.business.dtos.album.requests.AlbumAddRequest;
-import com.berkemre.spotifyproject.business.dtos.album.requests.AlbumUpdateRequest;
-import com.berkemre.spotifyproject.business.dtos.album.responses.AlbumAddResponse;
-import com.berkemre.spotifyproject.business.dtos.album.responses.AlbumGetResponse;
-import com.berkemre.spotifyproject.business.dtos.album.responses.AlbumUpdateResponse;
+import com.berkemre.spotifyproject.business.dtos.album.requests.AddAlbumRequest;
+import com.berkemre.spotifyproject.business.dtos.album.requests.UpdateAlbumRequest;
+import com.berkemre.spotifyproject.business.dtos.album.responses.AddAlbumResponse;
+import com.berkemre.spotifyproject.business.dtos.album.responses.GetAlbumResponse;
+import com.berkemre.spotifyproject.business.dtos.album.responses.UpdateAlbumResponse;
 import com.berkemre.spotifyproject.entities.Album;
 import java.util.List;
 import java.util.UUID;
 
 public interface AlbumService {
-  AlbumAddResponse add(AlbumAddRequest request);
+  AddAlbumResponse add(AddAlbumRequest request);
 
-  AlbumUpdateResponse update(UUID id, AlbumUpdateRequest request);
+  UpdateAlbumResponse update(UUID id, UpdateAlbumRequest request);
 
   void delete(UUID id);
 
-  AlbumGetResponse getById(UUID id);
+  GetAlbumResponse getById(UUID id);
 
-  List<AlbumGetResponse> getAll();
+  List<GetAlbumResponse> getAll();
 
   Album getForByIdNative(UUID id);
 }

@@ -1,11 +1,12 @@
 package com.berkemre.spotifyproject.api.controllers;
 
 import com.berkemre.spotifyproject.business.abstracts.GenreService;
-import com.berkemre.spotifyproject.business.dtos.genre.requests.GenreAddRequest;
-import com.berkemre.spotifyproject.business.dtos.genre.requests.GenreUpdateRequest;
-import com.berkemre.spotifyproject.business.dtos.genre.responses.GenreAddResponse;
-import com.berkemre.spotifyproject.business.dtos.genre.responses.GenreGetResponse;
-import com.berkemre.spotifyproject.business.dtos.genre.responses.GenreUpdateResponse;
+import com.berkemre.spotifyproject.business.dtos.genre.requests.AddGenreRequest;
+import com.berkemre.spotifyproject.business.dtos.genre.requests.UpdateGenreRequest;
+import com.berkemre.spotifyproject.business.dtos.genre.responses.AddGenreResponse;
+import com.berkemre.spotifyproject.business.dtos.genre.responses.GetGenreResponse;
+import com.berkemre.spotifyproject.business.dtos.genre.responses.UpdateGenreResponse;
+import jakarta.validation.Valid;
 import java.util.List;
 import java.util.UUID;
 import lombok.RequiredArgsConstructor;
@@ -19,24 +20,24 @@ public class GenresController {
   private final GenreService genreService;
 
   @GetMapping
-  public List<GenreGetResponse> getAll() {
+  public List<GetGenreResponse> getAll() {
     return genreService.getAll();
   }
 
   @GetMapping("/{id}")
-  public GenreGetResponse getById(@PathVariable UUID id) {
+  public GetGenreResponse getById(@PathVariable UUID id) {
     return genreService.getById(id);
   }
 
   @PostMapping
   @ResponseStatus(HttpStatus.CREATED)
-  public GenreAddResponse add(@RequestBody GenreAddRequest request) {
+  public AddGenreResponse add(@RequestBody @Valid AddGenreRequest request) {
     return genreService.add(request);
   }
 
   @PutMapping("/{id}")
-  public GenreUpdateResponse update(
-      @PathVariable UUID id, @RequestBody GenreUpdateRequest request) {
+  public UpdateGenreResponse update(
+      @PathVariable UUID id, @RequestBody @Valid UpdateGenreRequest request) {
 
     return genreService.update(id, request);
   }

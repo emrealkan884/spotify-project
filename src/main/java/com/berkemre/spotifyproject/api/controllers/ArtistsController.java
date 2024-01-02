@@ -1,11 +1,12 @@
 package com.berkemre.spotifyproject.api.controllers;
 
 import com.berkemre.spotifyproject.business.abstracts.ArtistService;
-import com.berkemre.spotifyproject.business.dtos.artist.requests.ArtistAddRequest;
-import com.berkemre.spotifyproject.business.dtos.artist.requests.ArtistUpdateRequest;
-import com.berkemre.spotifyproject.business.dtos.artist.responses.ArtistAddResponse;
-import com.berkemre.spotifyproject.business.dtos.artist.responses.ArtistGetResponse;
-import com.berkemre.spotifyproject.business.dtos.artist.responses.ArtistUpdateResponse;
+import com.berkemre.spotifyproject.business.dtos.artist.requests.AddArtistRequest;
+import com.berkemre.spotifyproject.business.dtos.artist.requests.UpdateArtistRequest;
+import com.berkemre.spotifyproject.business.dtos.artist.responses.AddArtistResponse;
+import com.berkemre.spotifyproject.business.dtos.artist.responses.GetArtistResponse;
+import com.berkemre.spotifyproject.business.dtos.artist.responses.UpdateArtistResponse;
+import jakarta.validation.Valid;
 import java.util.List;
 import java.util.UUID;
 import lombok.RequiredArgsConstructor;
@@ -19,24 +20,24 @@ public class ArtistsController {
   private final ArtistService artistService;
 
   @GetMapping
-  public List<ArtistGetResponse> getAll() {
+  public List<GetArtistResponse> getAll() {
     return artistService.getAll();
   }
 
   @GetMapping("/{id}")
-  public ArtistGetResponse getById(@PathVariable UUID id) {
+  public GetArtistResponse getById(@PathVariable UUID id) {
     return artistService.getById(id);
   }
 
   @PostMapping
   @ResponseStatus(HttpStatus.CREATED)
-  public ArtistAddResponse add(@RequestBody ArtistAddRequest request) {
+  public AddArtistResponse add(@RequestBody @Valid AddArtistRequest request) {
     return artistService.add(request);
   }
 
   @PutMapping("/{id}")
-  public ArtistUpdateResponse update(
-      @PathVariable UUID id, @RequestBody ArtistUpdateRequest request) {
+  public UpdateArtistResponse update(
+      @PathVariable UUID id, @RequestBody @Valid UpdateArtistRequest request) {
 
     return artistService.update(id, request);
   }

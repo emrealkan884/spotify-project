@@ -1,23 +1,21 @@
 package com.berkemre.spotifyproject.business.abstracts;
 
-import com.berkemre.spotifyproject.business.dtos.playlist.requests.PlaylistAddRequest;
-import com.berkemre.spotifyproject.business.dtos.playlist.requests.PlaylistUpdateRequest;
-import com.berkemre.spotifyproject.business.dtos.playlist.responses.PlaylistAddResponse;
-import com.berkemre.spotifyproject.business.dtos.playlist.responses.PlaylistGetResponse;
-import com.berkemre.spotifyproject.business.dtos.playlist.responses.PlaylistUpdateResponse;
-
+import com.berkemre.spotifyproject.business.dtos.playlist.requests.AddPlaylistRequest;
+import com.berkemre.spotifyproject.business.dtos.playlist.requests.UpdatePlaylistRequest;
+import com.berkemre.spotifyproject.business.dtos.playlist.responses.AddPlaylistResponse;
+import com.berkemre.spotifyproject.business.dtos.playlist.responses.GetPlaylistResponse;
+import com.berkemre.spotifyproject.business.dtos.playlist.responses.UpdatePlaylistResponse;
 import java.util.List;
 import java.util.UUID;
 
 public interface PlaylistService {
-    PlaylistAddResponse add(PlaylistAddRequest request);
+  AddPlaylistResponse add(AddPlaylistRequest request);
 
-    PlaylistUpdateResponse update(UUID id, PlaylistUpdateRequest request);
+  UpdatePlaylistResponse update(UUID id, UpdatePlaylistRequest request);
 
-    void delete(UUID id);
+  void delete(UUID id);
 
-    PlaylistGetResponse getById(UUID id);
+  GetPlaylistResponse getById(UUID id);
 
-    List<PlaylistGetResponse> getAll();
-
+  List<GetPlaylistResponse> getAll();
 }

@@ -1,24 +1,24 @@
 package com.berkemre.spotifyproject.business.abstracts;
 
-import com.berkemre.spotifyproject.business.dtos.music.requests.MusicAddRequest;
-import com.berkemre.spotifyproject.business.dtos.music.requests.MusicUpdateRequest;
-import com.berkemre.spotifyproject.business.dtos.music.responses.MusicAddResponse;
-import com.berkemre.spotifyproject.business.dtos.music.responses.MusicGetResponse;
-import com.berkemre.spotifyproject.business.dtos.music.responses.MusicUpdateResponse;
+import com.berkemre.spotifyproject.business.dtos.music.requests.AddMusicRequest;
+import com.berkemre.spotifyproject.business.dtos.music.requests.UpdateMusicRequest;
+import com.berkemre.spotifyproject.business.dtos.music.responses.AddMusicResponse;
+import com.berkemre.spotifyproject.business.dtos.music.responses.GetMusicResponse;
+import com.berkemre.spotifyproject.business.dtos.music.responses.UpdateMusicResponse;
 import com.berkemre.spotifyproject.entities.Music;
 import java.util.List;
 import java.util.UUID;
 
 public interface MusicService {
-  MusicAddResponse add(MusicAddRequest request);
+  AddMusicResponse add(AddMusicRequest request);
 
-  MusicUpdateResponse update(UUID id, MusicUpdateRequest request);
+  UpdateMusicResponse update(UUID id, UpdateMusicRequest request);
 
   void delete(UUID id);
 
-  MusicGetResponse getById(UUID id);
+  GetMusicResponse getById(UUID id);
 
-  List<MusicGetResponse> getAll();
+  List<GetMusicResponse> getAll();
 
   List<Music> getForByIdsNative(List<UUID> ids);
 

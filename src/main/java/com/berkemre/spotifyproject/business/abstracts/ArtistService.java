@@ -1,24 +1,24 @@
 package com.berkemre.spotifyproject.business.abstracts;
 
-import com.berkemre.spotifyproject.business.dtos.artist.requests.ArtistAddRequest;
-import com.berkemre.spotifyproject.business.dtos.artist.requests.ArtistUpdateRequest;
-import com.berkemre.spotifyproject.business.dtos.artist.responses.ArtistAddResponse;
-import com.berkemre.spotifyproject.business.dtos.artist.responses.ArtistGetResponse;
-import com.berkemre.spotifyproject.business.dtos.artist.responses.ArtistUpdateResponse;
+import com.berkemre.spotifyproject.business.dtos.artist.requests.AddArtistRequest;
+import com.berkemre.spotifyproject.business.dtos.artist.requests.UpdateArtistRequest;
+import com.berkemre.spotifyproject.business.dtos.artist.responses.AddArtistResponse;
+import com.berkemre.spotifyproject.business.dtos.artist.responses.GetArtistResponse;
+import com.berkemre.spotifyproject.business.dtos.artist.responses.UpdateArtistResponse;
 import com.berkemre.spotifyproject.entities.Artist;
 import java.util.List;
 import java.util.UUID;
 
 public interface ArtistService {
-  ArtistAddResponse add(ArtistAddRequest request);
+  AddArtistResponse add(AddArtistRequest request);
 
-  ArtistUpdateResponse update(UUID id, ArtistUpdateRequest request);
+  UpdateArtistResponse update(UUID id, UpdateArtistRequest request);
 
   void delete(UUID id);
 
-  ArtistGetResponse getById(UUID id);
+  GetArtistResponse getById(UUID id);
 
-  List<ArtistGetResponse> getAll();
+  List<GetArtistResponse> getAll();
 
   List<Artist> getForByIdsNative(List<UUID> ids);
 

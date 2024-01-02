@@ -3,11 +3,11 @@ package com.berkemre.spotifyproject.business.concretes;
 import com.berkemre.spotifyproject.business.abstracts.LikeService;
 import com.berkemre.spotifyproject.business.abstracts.MusicService;
 import com.berkemre.spotifyproject.business.abstracts.UserService;
-import com.berkemre.spotifyproject.business.dtos.like.requests.LikeAddRequest;
-import com.berkemre.spotifyproject.business.dtos.like.requests.LikeUpdateRequest;
-import com.berkemre.spotifyproject.business.dtos.like.responses.LikeAddResponse;
-import com.berkemre.spotifyproject.business.dtos.like.responses.LikeGetResponse;
-import com.berkemre.spotifyproject.business.dtos.like.responses.LikeUpdateResponse;
+import com.berkemre.spotifyproject.business.dtos.like.requests.AddLikeRequest;
+import com.berkemre.spotifyproject.business.dtos.like.requests.UpdateLikeRequest;
+import com.berkemre.spotifyproject.business.dtos.like.responses.AddLikeResponse;
+import com.berkemre.spotifyproject.business.dtos.like.responses.GetLikeResponse;
+import com.berkemre.spotifyproject.business.dtos.like.responses.UpdateLikeResponse;
 import com.berkemre.spotifyproject.entities.Like;
 import com.berkemre.spotifyproject.repositories.LikeRepository;
 import java.util.List;
@@ -23,24 +23,24 @@ public class LikeServiceImpl implements LikeService {
   private MusicService musicService;
 
   @Override
-  public LikeAddResponse add(LikeAddRequest request) {
+  public AddLikeResponse add(AddLikeRequest request) {
     Like like =
         Like.builder()
             .user(userService.getForByIdNative(request.getUserId()))
             .music(musicService.getForByIdNative(request.getMusicId()))
             .build();
     like = likeRepository.save(like);
-    LikeAddResponse likeAddResponse =
-        LikeAddResponse.builder()
+    AddLikeResponse addLikeResponse =
+        AddLikeResponse.builder()
             .musicId(like.getMusic().getId())
             .userId(like.getUser().getId())
             .date(like.getDate())
             .build();
-    return likeAddResponse;
+    return addLikeResponse;
   }
 
   @Override
-  public LikeUpdateResponse update(UUID id, LikeUpdateRequest request) {
+  public UpdateLikeResponse update(UUID id, UpdateLikeRequest request) {
     return null;
   }
 
@@ -48,12 +48,12 @@ public class LikeServiceImpl implements LikeService {
   public void delete(UUID id) {}
 
   @Override
-  public LikeGetResponse getById(UUID id) {
+  public GetLikeResponse getById(UUID id) {
     return null;
   }
 
   @Override
-  public List<LikeGetResponse> getAll() {
+  public List<GetLikeResponse> getAll() {
     return null;
   }
 }

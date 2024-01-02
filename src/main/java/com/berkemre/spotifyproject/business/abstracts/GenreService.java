@@ -1,24 +1,24 @@
 package com.berkemre.spotifyproject.business.abstracts;
 
-import com.berkemre.spotifyproject.business.dtos.genre.requests.GenreAddRequest;
-import com.berkemre.spotifyproject.business.dtos.genre.requests.GenreUpdateRequest;
-import com.berkemre.spotifyproject.business.dtos.genre.responses.GenreAddResponse;
-import com.berkemre.spotifyproject.business.dtos.genre.responses.GenreGetResponse;
-import com.berkemre.spotifyproject.business.dtos.genre.responses.GenreUpdateResponse;
+import com.berkemre.spotifyproject.business.dtos.genre.requests.AddGenreRequest;
+import com.berkemre.spotifyproject.business.dtos.genre.requests.UpdateGenreRequest;
+import com.berkemre.spotifyproject.business.dtos.genre.responses.AddGenreResponse;
+import com.berkemre.spotifyproject.business.dtos.genre.responses.GetGenreResponse;
+import com.berkemre.spotifyproject.business.dtos.genre.responses.UpdateGenreResponse;
 import com.berkemre.spotifyproject.entities.Genre;
 import java.util.List;
 import java.util.UUID;
 
 public interface GenreService {
-  GenreAddResponse add(GenreAddRequest request);
+  AddGenreResponse add(AddGenreRequest request);
 
-  GenreUpdateResponse update(UUID id, GenreUpdateRequest request);
+  UpdateGenreResponse update(UUID id, UpdateGenreRequest request);
 
   void delete(UUID id);
 
-  GenreGetResponse getById(UUID id);
+  GetGenreResponse getById(UUID id);
 
-  List<GenreGetResponse> getAll();
+  List<GetGenreResponse> getAll();
 
   Genre getForByIdNative(UUID id);
 }

@@ -2,11 +2,11 @@ package com.berkemre.spotifyproject.business.concretes;
 
 import com.berkemre.spotifyproject.business.abstracts.AlbumService;
 import com.berkemre.spotifyproject.business.abstracts.MusicService;
-import com.berkemre.spotifyproject.business.dtos.music.requests.MusicAddRequest;
-import com.berkemre.spotifyproject.business.dtos.music.requests.MusicUpdateRequest;
-import com.berkemre.spotifyproject.business.dtos.music.responses.MusicAddResponse;
-import com.berkemre.spotifyproject.business.dtos.music.responses.MusicGetResponse;
-import com.berkemre.spotifyproject.business.dtos.music.responses.MusicUpdateResponse;
+import com.berkemre.spotifyproject.business.dtos.music.requests.AddMusicRequest;
+import com.berkemre.spotifyproject.business.dtos.music.requests.UpdateMusicRequest;
+import com.berkemre.spotifyproject.business.dtos.music.responses.AddMusicResponse;
+import com.berkemre.spotifyproject.business.dtos.music.responses.GetMusicResponse;
+import com.berkemre.spotifyproject.business.dtos.music.responses.UpdateMusicResponse;
 import com.berkemre.spotifyproject.entities.Music;
 import com.berkemre.spotifyproject.repositories.MusicRepository;
 import java.util.List;
@@ -21,7 +21,7 @@ public class MusicServiceImpl implements MusicService {
   private final AlbumService albumService;
 
   @Override
-  public MusicAddResponse add(MusicAddRequest request) {
+  public AddMusicResponse add(AddMusicRequest request) {
     Music music =
         Music.builder()
             .name(request.getName())
@@ -32,19 +32,19 @@ public class MusicServiceImpl implements MusicService {
             .genre(albumService.getForByIdNative(request.getAlbumId()).getArtist().getGenre())
             .build();
     music = musicRepository.save(music);
-    MusicAddResponse musicAddResponse =
-        MusicAddResponse.builder()
+    AddMusicResponse addMusicResponse =
+        AddMusicResponse.builder()
             .id(music.getId())
             .name(music.getName())
             .artistName(music.getAlbum().getArtist().getName())
             .genreName(music.getGenre().getName())
             .link(music.getLink())
             .build();
-    return musicAddResponse;
+    return addMusicResponse;
   }
 
   @Override
-  public MusicUpdateResponse update(UUID id, MusicUpdateRequest request) {
+  public UpdateMusicResponse update(UUID id, UpdateMusicRequest request) {
     return null;
   }
 
@@ -52,12 +52,12 @@ public class MusicServiceImpl implements MusicService {
   public void delete(UUID id) {}
 
   @Override
-  public MusicGetResponse getById(UUID id) {
+  public GetMusicResponse getById(UUID id) {
     return null;
   }
 
   @Override
-  public List<MusicGetResponse> getAll() {
+  public List<GetMusicResponse> getAll() {
     return null;
   }
 

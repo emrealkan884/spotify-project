@@ -1,16 +1,19 @@
 package com.berkemre.spotifyproject.business.concretes;
 
 import com.berkemre.spotifyproject.business.abstracts.GenreService;
-import com.berkemre.spotifyproject.business.dtos.genre.requests.GenreAddRequest;
-import com.berkemre.spotifyproject.business.dtos.genre.requests.GenreUpdateRequest;
-import com.berkemre.spotifyproject.business.dtos.genre.responses.GenreAddResponse;
-import com.berkemre.spotifyproject.business.dtos.genre.responses.GenreGetResponse;
-import com.berkemre.spotifyproject.business.dtos.genre.responses.GenreUpdateResponse;
+import com.berkemre.spotifyproject.business.dtos.genre.requests.AddGenreRequest;
+import com.berkemre.spotifyproject.business.dtos.genre.requests.UpdateGenreRequest;
+import com.berkemre.spotifyproject.business.dtos.genre.responses.AddGenreResponse;
+import com.berkemre.spotifyproject.business.dtos.genre.responses.GetGenreResponse;
+import com.berkemre.spotifyproject.business.dtos.genre.responses.UpdateGenreResponse;
+import com.berkemre.spotifyproject.core.exceptions.BusinessException;
 import com.berkemre.spotifyproject.entities.Genre;
+import com.berkemre.spotifyproject.entities.Music;
 import com.berkemre.spotifyproject.repositories.GenreRepository;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -20,16 +23,16 @@ public class GenreServiceImpl implements GenreService {
   private final GenreRepository genreRepository;
 
   @Override
-  public GenreAddResponse add(GenreAddRequest request) {
+  public AddGenreResponse add(AddGenreRequest request) {
     Genre genre = Genre.builder().name(request.getName()).build();
     genre = genreRepository.save(genre);
-    GenreAddResponse genreAddResponse =
-        GenreAddResponse.builder().id(genre.getId()).name(genre.getName()).build();
-    return genreAddResponse;
+    AddGenreResponse addGenreResponse =
+        AddGenreResponse.builder().id(genre.getId()).name(genre.getName()).build();
+    return addGenreResponse;
   }
 
   @Override
-  public GenreUpdateResponse update(UUID id, GenreUpdateRequest request) {
+  public UpdateGenreResponse update(UUID id, UpdateGenreRequest request) {
     return null;
   }
 
@@ -37,28 +40,30 @@ public class GenreServiceImpl implements GenreService {
   public void delete(UUID id) {}
 
   @Override
-  public GenreGetResponse getById(UUID id) {
+  public GetGenreResponse getById(UUID id) {
     checkIfGenreExists(id);
     Genre genre = genreRepository.getReferenceById(id);
-    GenreGetResponse genreGetResponse =
-        GenreGetResponse.builder()
+    GetGenreResponse getGenreResponse =
+        GetGenreResponse.builder()
             .name(genre.getName())
-            .musics(genre.getMusics())
+            .musicsName(genre.getMusics().stream().map(Music::getName).collect(Collectors.toList()))
             .id(genre.getId())
             .build();
-    return genreGetResponse;
+    return getGenreResponse;
   }
 
   @Override
-  public List<GenreGetResponse> getAll() {
+  public List<GetGenreResponse> getAll() {
     List<Genre> genres = genreRepository.findAll();
-    GenreGetResponse genreGetResponse = new GenreGetResponse();
-    List<GenreGetResponse> responses = new ArrayList<>();
+    GetGenreResponse getGenreResponse;
+    List<GetGenreResponse> responses = new ArrayList<>();
     for (Genre genre : genres) {
-      genreGetResponse.setId(genre.getId());
-      genreGetResponse.setName(genre.getName());
-      genreGetResponse.setMusics(genre.getMusics());
-      responses.add(genreGetResponse);
+      getGenreResponse = new GetGenreResponse();
+      getGenreResponse.setId(genre.getId());
+      getGenreResponse.setName(genre.getName());
+      getGenreResponse.setMusicsName(
+          genre.getMusics().stream().map(Music::getName).collect(Collectors.toList()));
+      responses.add(getGenreResponse);
     }
     return responses;
   }
@@ -70,6 +75,6 @@ public class GenreServiceImpl implements GenreService {
   }
 
   private void checkIfGenreExists(UUID id) {
-    if (!genreRepository.existsById(id)) throw new RuntimeException("Boyle bir tarz mevcut degil");
+    if (!genreRepository.existsById(id)) throw new BusinessException("Boyle bir tarz mevcut degil");
   }
 }

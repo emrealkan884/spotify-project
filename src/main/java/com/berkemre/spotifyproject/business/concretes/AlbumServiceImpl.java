@@ -2,11 +2,12 @@ package com.berkemre.spotifyproject.business.concretes;
 
 import com.berkemre.spotifyproject.business.abstracts.AlbumService;
 import com.berkemre.spotifyproject.business.abstracts.ArtistService;
-import com.berkemre.spotifyproject.business.dtos.album.requests.AlbumAddRequest;
-import com.berkemre.spotifyproject.business.dtos.album.requests.AlbumUpdateRequest;
-import com.berkemre.spotifyproject.business.dtos.album.responses.AlbumAddResponse;
-import com.berkemre.spotifyproject.business.dtos.album.responses.AlbumGetResponse;
-import com.berkemre.spotifyproject.business.dtos.album.responses.AlbumUpdateResponse;
+import com.berkemre.spotifyproject.business.dtos.album.requests.AddAlbumRequest;
+import com.berkemre.spotifyproject.business.dtos.album.requests.UpdateAlbumRequest;
+import com.berkemre.spotifyproject.business.dtos.album.responses.AddAlbumResponse;
+import com.berkemre.spotifyproject.business.dtos.album.responses.GetAlbumResponse;
+import com.berkemre.spotifyproject.business.dtos.album.responses.UpdateAlbumResponse;
+import com.berkemre.spotifyproject.core.exceptions.BusinessException;
 import com.berkemre.spotifyproject.entities.Album;
 import com.berkemre.spotifyproject.repositories.AlbumRepository;
 import java.time.LocalDate;
@@ -23,7 +24,7 @@ public class AlbumServiceImpl implements AlbumService {
   private final ArtistService artistService;
 
   @Override
-  public AlbumAddResponse add(AlbumAddRequest request) {
+  public AddAlbumResponse add(AddAlbumRequest request) {
     Album album =
         Album.builder()
             .name(request.getName())
@@ -31,26 +32,26 @@ public class AlbumServiceImpl implements AlbumService {
             .releaseDate(LocalDate.now())
             .build();
     album = albumRepository.save(album);
-    AlbumAddResponse albumAddResponse =
-        AlbumAddResponse.builder()
+    AddAlbumResponse addAlbumResponse =
+        AddAlbumResponse.builder()
             .id(album.getId())
             .name(album.getName())
             .musics(album.getMusics())
             .artistName(album.getArtist().getName())
             .releaseDate(album.getReleaseDate())
             .build();
-    return albumAddResponse;
+    return addAlbumResponse;
   }
 
   @Override
-  public AlbumUpdateResponse update(UUID id, AlbumUpdateRequest request) {
+  public UpdateAlbumResponse update(UUID id, UpdateAlbumRequest request) {
     checkIfAlbumExists(id);
     Album album = albumRepository.getReferenceById(id);
     album.setName(request.getName());
     album.setReleaseDate(request.getReleaseDate());
     album = albumRepository.save(album);
-    AlbumUpdateResponse albumUpdateResponse =
-        AlbumUpdateResponse.builder()
+    UpdateAlbumResponse albumUpdateResponse =
+        UpdateAlbumResponse.builder()
             .id(album.getId())
             .name(album.getName())
             .releaseDate(album.getReleaseDate())
@@ -65,28 +66,28 @@ public class AlbumServiceImpl implements AlbumService {
   }
 
   @Override
-  public AlbumGetResponse getById(UUID id) {
+  public GetAlbumResponse getById(UUID id) {
     checkIfAlbumExists(id);
     Album album = albumRepository.getReferenceById(id);
-    AlbumGetResponse albumGetResponse =
-        AlbumGetResponse.builder()
+    GetAlbumResponse getAlbumResponse =
+        GetAlbumResponse.builder()
             .releaseDate(album.getReleaseDate())
             .name(album.getName())
             .id(album.getId())
             .build();
-    return albumGetResponse;
+    return getAlbumResponse;
   }
 
   @Override
-  public List<AlbumGetResponse> getAll() {
+  public List<GetAlbumResponse> getAll() {
     List<Album> albums = albumRepository.findAll();
-    AlbumGetResponse albumGetResponse = new AlbumGetResponse();
-    List<AlbumGetResponse> responses = new ArrayList<>();
+    GetAlbumResponse getAlbumResponse = new GetAlbumResponse();
+    List<GetAlbumResponse> responses = new ArrayList<>();
     for (Album album : albums) {
-      albumGetResponse.setId(album.getId());
-      albumGetResponse.setName(album.getName());
-      albumGetResponse.setReleaseDate(album.getReleaseDate());
-      responses.add(albumGetResponse);
+      getAlbumResponse.setId(album.getId());
+      getAlbumResponse.setName(album.getName());
+      getAlbumResponse.setReleaseDate(album.getReleaseDate());
+      responses.add(getAlbumResponse);
     }
     return responses;
   }
@@ -98,6 +99,7 @@ public class AlbumServiceImpl implements AlbumService {
   }
 
   private void checkIfAlbumExists(UUID id) {
-    if (!albumRepository.existsById(id)) throw new RuntimeException("Boyle bir album mevcut degil");
+    if (!albumRepository.existsById(id))
+      throw new BusinessException("Boyle bir album mevcut degil");
   }
 }
