@@ -4,6 +4,7 @@ import com.berkemre.spotifyproject.business.abstracts.ArtistService;
 import com.berkemre.spotifyproject.business.dtos.artist.requests.AddArtistRequest;
 import com.berkemre.spotifyproject.business.dtos.artist.requests.UpdateArtistRequest;
 import com.berkemre.spotifyproject.business.dtos.artist.responses.AddArtistResponse;
+import com.berkemre.spotifyproject.business.dtos.artist.responses.GetAllArtistsResponse;
 import com.berkemre.spotifyproject.business.dtos.artist.responses.GetArtistResponse;
 import com.berkemre.spotifyproject.business.dtos.artist.responses.UpdateArtistResponse;
 import jakarta.validation.Valid;
@@ -20,7 +21,7 @@ public class ArtistsController {
   private final ArtistService artistService;
 
   @GetMapping
-  public List<GetArtistResponse> getAll() {
+  public List<GetAllArtistsResponse> getAll() {
     return artistService.getAll();
   }
 

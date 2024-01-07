@@ -5,6 +5,7 @@ import com.berkemre.spotifyproject.business.abstracts.UserService;
 import com.berkemre.spotifyproject.business.dtos.playlist.requests.AddPlaylistRequest;
 import com.berkemre.spotifyproject.business.dtos.playlist.requests.UpdatePlaylistRequest;
 import com.berkemre.spotifyproject.business.dtos.playlist.responses.AddPlaylistResponse;
+import com.berkemre.spotifyproject.business.dtos.playlist.responses.GetAllPlaylistsResponse;
 import com.berkemre.spotifyproject.business.dtos.playlist.responses.GetPlaylistResponse;
 import com.berkemre.spotifyproject.business.dtos.playlist.responses.UpdatePlaylistResponse;
 import com.berkemre.spotifyproject.entities.Playlist;
@@ -49,7 +50,7 @@ public class PlaylistServiceImpl implements PlaylistService {
   }
 
   @Override
-  public List<GetPlaylistResponse> getAll() {
+  public List<GetAllPlaylistsResponse> getAll() {
     return null;
   }
 }

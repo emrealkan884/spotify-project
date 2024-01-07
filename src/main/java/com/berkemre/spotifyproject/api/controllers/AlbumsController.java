@@ -5,6 +5,7 @@ import com.berkemre.spotifyproject.business.dtos.album.requests.AddAlbumRequest;
 import com.berkemre.spotifyproject.business.dtos.album.requests.UpdateAlbumRequest;
 import com.berkemre.spotifyproject.business.dtos.album.responses.AddAlbumResponse;
 import com.berkemre.spotifyproject.business.dtos.album.responses.GetAlbumResponse;
+import com.berkemre.spotifyproject.business.dtos.album.responses.GetAllAlbumsResponse;
 import com.berkemre.spotifyproject.business.dtos.album.responses.UpdateAlbumResponse;
 import java.util.List;
 import java.util.UUID;
@@ -19,7 +20,7 @@ public class AlbumsController {
   private final AlbumService albumService;
 
   @GetMapping
-  public List<GetAlbumResponse> getAll() {
+  public List<GetAllAlbumsResponse> getAll() {
     return albumService.getAll();
   }
 

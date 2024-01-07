@@ -3,6 +3,7 @@ package com.berkemre.spotifyproject.business.abstracts;
 import com.berkemre.spotifyproject.business.dtos.like.requests.AddLikeRequest;
 import com.berkemre.spotifyproject.business.dtos.like.requests.UpdateLikeRequest;
 import com.berkemre.spotifyproject.business.dtos.like.responses.AddLikeResponse;
+import com.berkemre.spotifyproject.business.dtos.like.responses.GetAllLikesResponse;
 import com.berkemre.spotifyproject.business.dtos.like.responses.GetLikeResponse;
 import com.berkemre.spotifyproject.business.dtos.like.responses.UpdateLikeResponse;
 import java.util.List;
@@ -17,5 +18,5 @@ public interface LikeService {
 
   GetLikeResponse getById(UUID id);
 
-  List<GetLikeResponse> getAll();
+  List<GetAllLikesResponse> getAll();
 }

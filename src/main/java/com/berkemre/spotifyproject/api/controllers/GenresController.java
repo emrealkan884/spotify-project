@@ -4,6 +4,7 @@ import com.berkemre.spotifyproject.business.abstracts.GenreService;
 import com.berkemre.spotifyproject.business.dtos.genre.requests.AddGenreRequest;
 import com.berkemre.spotifyproject.business.dtos.genre.requests.UpdateGenreRequest;
 import com.berkemre.spotifyproject.business.dtos.genre.responses.AddGenreResponse;
+import com.berkemre.spotifyproject.business.dtos.genre.responses.GetAllGenresResponse;
 import com.berkemre.spotifyproject.business.dtos.genre.responses.GetGenreResponse;
 import com.berkemre.spotifyproject.business.dtos.genre.responses.UpdateGenreResponse;
 import jakarta.validation.Valid;
@@ -20,7 +21,7 @@ public class GenresController {
   private final GenreService genreService;
 
   @GetMapping
-  public List<GetGenreResponse> getAll() {
+  public List<GetAllGenresResponse> getAll() {
     return genreService.getAll();
   }
 

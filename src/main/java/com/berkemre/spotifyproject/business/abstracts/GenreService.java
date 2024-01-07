@@ -3,6 +3,7 @@ package com.berkemre.spotifyproject.business.abstracts;
 import com.berkemre.spotifyproject.business.dtos.genre.requests.AddGenreRequest;
 import com.berkemre.spotifyproject.business.dtos.genre.requests.UpdateGenreRequest;
 import com.berkemre.spotifyproject.business.dtos.genre.responses.AddGenreResponse;
+import com.berkemre.spotifyproject.business.dtos.genre.responses.GetAllGenresResponse;
 import com.berkemre.spotifyproject.business.dtos.genre.responses.GetGenreResponse;
 import com.berkemre.spotifyproject.business.dtos.genre.responses.UpdateGenreResponse;
 import com.berkemre.spotifyproject.entities.Genre;
@@ -18,7 +19,7 @@ public interface GenreService {
 
   GetGenreResponse getById(UUID id);
 
-  List<GetGenreResponse> getAll();
+  List<GetAllGenresResponse> getAll();
 
   Genre getForByIdNative(UUID id);
 }

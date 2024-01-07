@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class GetArtistResponse {
-  // private List<Album> albums;
+public class GetAllArtistsResponse {
+  // private List<GetAllAlbumsResponse> albums;
   private String name;
 }

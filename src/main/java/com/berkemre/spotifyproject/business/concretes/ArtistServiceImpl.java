@@ -5,6 +5,7 @@ import com.berkemre.spotifyproject.business.abstracts.GenreService;
 import com.berkemre.spotifyproject.business.dtos.artist.requests.AddArtistRequest;
 import com.berkemre.spotifyproject.business.dtos.artist.requests.UpdateArtistRequest;
 import com.berkemre.spotifyproject.business.dtos.artist.responses.AddArtistResponse;
+import com.berkemre.spotifyproject.business.dtos.artist.responses.GetAllArtistsResponse;
 import com.berkemre.spotifyproject.business.dtos.artist.responses.GetArtistResponse;
 import com.berkemre.spotifyproject.business.dtos.artist.responses.UpdateArtistResponse;
 import com.berkemre.spotifyproject.core.exceptions.BusinessException;
@@ -57,19 +58,19 @@ public class ArtistServiceImpl implements ArtistService {
     checkIfArtistExists(id);
     Artist artist = artistRepository.getReferenceById(id);
     GetArtistResponse getArtistResponse =
-        GetArtistResponse.builder().name(artist.getName()).albums(artist.getAlbums()).build();
+        GetArtistResponse.builder().name(artist.getName()).build();
     return getArtistResponse;
   }
 
   @Override
-  public List<GetArtistResponse> getAll() {
-    List<GetArtistResponse> responses = new ArrayList<>();
-    GetArtistResponse getArtistResponse = new GetArtistResponse();
+  public List<GetAllArtistsResponse> getAll() {
+    List<GetAllArtistsResponse> responses = new ArrayList<>();
+    GetAllArtistsResponse getAllArtistsResponse;
     List<Artist> artists = artistRepository.findAll();
     for (Artist artist : artists) {
-      getArtistResponse.setName(artist.getName());
-      getArtistResponse.setAlbums(artist.getAlbums());
-      responses.add(getArtistResponse);
+      getAllArtistsResponse = new GetAllArtistsResponse();
+      getAllArtistsResponse.setName(artist.getName());
+      responses.add(getAllArtistsResponse);
     }
     return responses;
   }

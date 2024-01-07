@@ -4,6 +4,7 @@ import com.berkemre.spotifyproject.business.abstracts.PlaylistService;
 import com.berkemre.spotifyproject.business.dtos.playlist.requests.AddPlaylistRequest;
 import com.berkemre.spotifyproject.business.dtos.playlist.requests.UpdatePlaylistRequest;
 import com.berkemre.spotifyproject.business.dtos.playlist.responses.AddPlaylistResponse;
+import com.berkemre.spotifyproject.business.dtos.playlist.responses.GetAllPlaylistsResponse;
 import com.berkemre.spotifyproject.business.dtos.playlist.responses.GetPlaylistResponse;
 import com.berkemre.spotifyproject.business.dtos.playlist.responses.UpdatePlaylistResponse;
 import java.util.List;
@@ -19,7 +20,7 @@ public class PlaylistsController {
   private final PlaylistService playlistService;
 
   @GetMapping
-  public List<GetPlaylistResponse> getAll() {
+  public List<GetAllPlaylistsResponse> getAll() {
     return playlistService.getAll();
   }
 

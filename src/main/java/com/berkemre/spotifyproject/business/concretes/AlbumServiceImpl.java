@@ -6,9 +6,11 @@ import com.berkemre.spotifyproject.business.dtos.album.requests.AddAlbumRequest;
 import com.berkemre.spotifyproject.business.dtos.album.requests.UpdateAlbumRequest;
 import com.berkemre.spotifyproject.business.dtos.album.responses.AddAlbumResponse;
 import com.berkemre.spotifyproject.business.dtos.album.responses.GetAlbumResponse;
+import com.berkemre.spotifyproject.business.dtos.album.responses.GetAllAlbumsResponse;
 import com.berkemre.spotifyproject.business.dtos.album.responses.UpdateAlbumResponse;
 import com.berkemre.spotifyproject.core.exceptions.BusinessException;
 import com.berkemre.spotifyproject.entities.Album;
+import com.berkemre.spotifyproject.entities.Artist;
 import com.berkemre.spotifyproject.repositories.AlbumRepository;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -79,11 +81,12 @@ public class AlbumServiceImpl implements AlbumService {
   }
 
   @Override
-  public List<GetAlbumResponse> getAll() {
+  public List<GetAllAlbumsResponse> getAll() {
     List<Album> albums = albumRepository.findAll();
-    GetAlbumResponse getAlbumResponse = new GetAlbumResponse();
-    List<GetAlbumResponse> responses = new ArrayList<>();
+    GetAllAlbumsResponse getAlbumResponse;
+    List<GetAllAlbumsResponse> responses = new ArrayList<>();
     for (Album album : albums) {
+      getAlbumResponse = new GetAllAlbumsResponse();
       getAlbumResponse.setId(album.getId());
       getAlbumResponse.setName(album.getName());
       getAlbumResponse.setReleaseDate(album.getReleaseDate());
@@ -96,6 +99,11 @@ public class AlbumServiceImpl implements AlbumService {
   public Album getForByIdNative(UUID id) {
     checkIfAlbumExists(id);
     return albumRepository.getForByIdNative(id);
+  }
+
+  @Override
+  public List<GetAllAlbumsResponse> getForByArtist(Artist artist) {
+    return albumRepository.getForByArtistId(artist);
   }
 
   private void checkIfAlbumExists(UUID id) {

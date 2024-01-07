@@ -35,11 +35,13 @@ public class Music {
   @OneToMany(mappedBy = "music")
   private List<Like> likes;
 
-  @ManyToMany(fetch = FetchType.EAGER)
+  @ManyToMany(fetch = FetchType.LAZY)
   @JoinTable(
       name = "playlist_musics",
       joinColumns = @JoinColumn(name = "playlist_id"),
       inverseJoinColumns = @JoinColumn(name = "music_id"))
+  // @JsonManagedReference // Playlistin icinde music var music in icinde playlist var. Donguye
+  // girmesin diye kullandik.Request Response olmasa donguyu kirmak icin kullanacaktik.
   private List<Playlist> playlists;
 
   //  @ManyToOne

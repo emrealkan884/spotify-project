@@ -6,6 +6,7 @@ import com.berkemre.spotifyproject.business.abstracts.UserService;
 import com.berkemre.spotifyproject.business.dtos.like.requests.AddLikeRequest;
 import com.berkemre.spotifyproject.business.dtos.like.requests.UpdateLikeRequest;
 import com.berkemre.spotifyproject.business.dtos.like.responses.AddLikeResponse;
+import com.berkemre.spotifyproject.business.dtos.like.responses.GetAllLikesResponse;
 import com.berkemre.spotifyproject.business.dtos.like.responses.GetLikeResponse;
 import com.berkemre.spotifyproject.business.dtos.like.responses.UpdateLikeResponse;
 import com.berkemre.spotifyproject.entities.Like;
@@ -53,7 +54,7 @@ public class LikeServiceImpl implements LikeService {
   }
 
   @Override
-  public List<GetLikeResponse> getAll() {
+  public List<GetAllLikesResponse> getAll() {
     return null;
   }
 }

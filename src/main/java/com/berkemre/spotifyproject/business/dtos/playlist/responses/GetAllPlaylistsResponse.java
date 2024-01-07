@@ -1,15 +1,15 @@
-package com.berkemre.spotifyproject.business.dtos.artist.responses;
+package com.berkemre.spotifyproject.business.dtos.playlist.responses;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Builder
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class GetArtistResponse {
-  // private List<Album> albums;
+@Builder
+public class GetAllPlaylistsResponse {
   private String name;
+  // private List<Music> musics;
 }

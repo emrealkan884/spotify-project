@@ -3,6 +3,7 @@ package com.berkemre.spotifyproject.business.abstracts;
 import com.berkemre.spotifyproject.business.dtos.artist.requests.AddArtistRequest;
 import com.berkemre.spotifyproject.business.dtos.artist.requests.UpdateArtistRequest;
 import com.berkemre.spotifyproject.business.dtos.artist.responses.AddArtistResponse;
+import com.berkemre.spotifyproject.business.dtos.artist.responses.GetAllArtistsResponse;
 import com.berkemre.spotifyproject.business.dtos.artist.responses.GetArtistResponse;
 import com.berkemre.spotifyproject.business.dtos.artist.responses.UpdateArtistResponse;
 import com.berkemre.spotifyproject.entities.Artist;
@@ -18,7 +19,7 @@ public interface ArtistService {
 
   GetArtistResponse getById(UUID id);
 
-  List<GetArtistResponse> getAll();
+  List<GetAllArtistsResponse> getAll();
 
   List<Artist> getForByIdsNative(List<UUID> ids);
 

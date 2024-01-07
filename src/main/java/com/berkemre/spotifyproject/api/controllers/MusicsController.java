@@ -4,6 +4,7 @@ import com.berkemre.spotifyproject.business.abstracts.MusicService;
 import com.berkemre.spotifyproject.business.dtos.music.requests.AddMusicRequest;
 import com.berkemre.spotifyproject.business.dtos.music.requests.UpdateMusicRequest;
 import com.berkemre.spotifyproject.business.dtos.music.responses.AddMusicResponse;
+import com.berkemre.spotifyproject.business.dtos.music.responses.GetAllMusicsResponse;
 import com.berkemre.spotifyproject.business.dtos.music.responses.GetMusicResponse;
 import com.berkemre.spotifyproject.business.dtos.music.responses.UpdateMusicResponse;
 import java.util.List;
@@ -19,7 +20,7 @@ public class MusicsController {
   private final MusicService musicService;
 
   @GetMapping
-  public List<GetMusicResponse> getAll() {
+  public List<GetAllMusicsResponse> getAll() {
     return musicService.getAll();
   }
 

@@ -3,6 +3,7 @@ package com.berkemre.spotifyproject.business.abstracts;
 import com.berkemre.spotifyproject.business.dtos.playlist.requests.AddPlaylistRequest;
 import com.berkemre.spotifyproject.business.dtos.playlist.requests.UpdatePlaylistRequest;
 import com.berkemre.spotifyproject.business.dtos.playlist.responses.AddPlaylistResponse;
+import com.berkemre.spotifyproject.business.dtos.playlist.responses.GetAllPlaylistsResponse;
 import com.berkemre.spotifyproject.business.dtos.playlist.responses.GetPlaylistResponse;
 import com.berkemre.spotifyproject.business.dtos.playlist.responses.UpdatePlaylistResponse;
 import java.util.List;
@@ -17,5 +18,5 @@ public interface PlaylistService {
 
   GetPlaylistResponse getById(UUID id);
 
-  List<GetPlaylistResponse> getAll();
+  List<GetAllPlaylistsResponse> getAll();
 }

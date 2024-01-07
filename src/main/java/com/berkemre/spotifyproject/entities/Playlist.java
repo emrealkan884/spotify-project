@@ -26,7 +26,8 @@ public class Playlist {
 
   private LocalDate createdDate;
 
-  @ManyToMany(mappedBy = "playlists")
+  @ManyToMany(mappedBy = "playlists", fetch = FetchType.LAZY)
+  // @JsonBackReference , Request Response olmasa donguyu kirmak icin kullanacaktik.
   private List<Music> musics = new ArrayList<>();
 
   @ManyToOne

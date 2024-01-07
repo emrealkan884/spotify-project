@@ -4,6 +4,7 @@ import com.berkemre.spotifyproject.business.abstracts.GenreService;
 import com.berkemre.spotifyproject.business.dtos.genre.requests.AddGenreRequest;
 import com.berkemre.spotifyproject.business.dtos.genre.requests.UpdateGenreRequest;
 import com.berkemre.spotifyproject.business.dtos.genre.responses.AddGenreResponse;
+import com.berkemre.spotifyproject.business.dtos.genre.responses.GetAllGenresResponse;
 import com.berkemre.spotifyproject.business.dtos.genre.responses.GetGenreResponse;
 import com.berkemre.spotifyproject.business.dtos.genre.responses.UpdateGenreResponse;
 import com.berkemre.spotifyproject.core.exceptions.BusinessException;
@@ -53,17 +54,17 @@ public class GenreServiceImpl implements GenreService {
   }
 
   @Override
-  public List<GetGenreResponse> getAll() {
+  public List<GetAllGenresResponse> getAll() {
     List<Genre> genres = genreRepository.findAll();
-    GetGenreResponse getGenreResponse;
-    List<GetGenreResponse> responses = new ArrayList<>();
+    GetAllGenresResponse getAllGenreResponse;
+    List<GetAllGenresResponse> responses = new ArrayList<>();
     for (Genre genre : genres) {
-      getGenreResponse = new GetGenreResponse();
-      getGenreResponse.setId(genre.getId());
-      getGenreResponse.setName(genre.getName());
-      getGenreResponse.setMusicsName(
+      getAllGenreResponse = new GetAllGenresResponse();
+      getAllGenreResponse.setId(genre.getId());
+      getAllGenreResponse.setName(genre.getName());
+      getAllGenreResponse.setMusicsName(
           genre.getMusics().stream().map(Music::getName).collect(Collectors.toList()));
-      responses.add(getGenreResponse);
+      responses.add(getAllGenreResponse);
     }
     return responses;
   }
