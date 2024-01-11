@@ -9,8 +9,8 @@ import lombok.NoArgsConstructor;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
 @Data
+@Builder
 public class AddArtistRequest {
   @Size(min = 3, max = 25, message = "Artist adi minimum 3 maximum 20 haneli olmalidir.")
   private String name;

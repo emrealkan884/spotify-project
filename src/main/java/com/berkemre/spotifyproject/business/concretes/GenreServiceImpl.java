@@ -9,62 +9,58 @@ import com.berkemre.spotifyproject.business.dtos.genre.responses.GetGenreRespons
 import com.berkemre.spotifyproject.business.dtos.genre.responses.UpdateGenreResponse;
 import com.berkemre.spotifyproject.core.exceptions.BusinessException;
 import com.berkemre.spotifyproject.entities.Genre;
-import com.berkemre.spotifyproject.entities.Music;
 import com.berkemre.spotifyproject.repositories.GenreRepository;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
 public class GenreServiceImpl implements GenreService {
   private final GenreRepository genreRepository;
+  private final ModelMapper modelMapper;
 
   @Override
   public AddGenreResponse add(AddGenreRequest request) {
-    Genre genre = Genre.builder().name(request.getName()).build();
-    genre = genreRepository.save(genre);
-    AddGenreResponse addGenreResponse =
-        AddGenreResponse.builder().id(genre.getId()).name(genre.getName()).build();
-    return addGenreResponse;
+    checkIfGenreExistsByName(request.getName());
+    Genre genre = modelMapper.map(request, Genre.class);
+    genre.setId(UUID.randomUUID()); // Dto'muzda birden fazla id varsa mapper in kafasi karisiyor.
+    Genre createdGenre = genreRepository.save(genre);
+    AddGenreResponse response = modelMapper.map(createdGenre, AddGenreResponse.class);
+    return response;
   }
 
   @Override
   public UpdateGenreResponse update(UUID id, UpdateGenreRequest request) {
-    return null;
+    checkIfGenreExists(id);
+    Genre genre = modelMapper.map(request, Genre.class);
+    genre.setId(id);
+    Genre updatedGenre = genreRepository.save(genre);
+    UpdateGenreResponse response = modelMapper.map(updatedGenre, UpdateGenreResponse.class);
+    return response;
   }
 
   @Override
-  public void delete(UUID id) {}
+  public void delete(UUID id) {
+    genreRepository.deleteById(id);
+  }
 
   @Override
   public GetGenreResponse getById(UUID id) {
     checkIfGenreExists(id);
     Genre genre = genreRepository.findById(id).orElseThrow();
-    GetGenreResponse getGenreResponse =
-        GetGenreResponse.builder()
-            .name(genre.getName())
-            .musicsName(genre.getMusics().stream().map(Music::getName).collect(Collectors.toList()))
-            .id(genre.getId())
-            .build();
-    return getGenreResponse;
+    GetGenreResponse response = modelMapper.map(genre, GetGenreResponse.class);
+    return response;
   }
 
   @Override
   public List<GetAllGenresResponse> getAll() {
     List<Genre> genres = genreRepository.findAll();
-    List<GetAllGenresResponse> response = new ArrayList<>();
+    List<GetAllGenresResponse> response =
+        genres.stream().map(genre -> modelMapper.map(genre, GetAllGenresResponse.class)).toList();
 
-    for (Genre genre : genres) {
-      response.add(
-          new GetAllGenresResponse(
-              genre.getId(),
-              genre.getName(),
-              genre.getMusics().stream().map(Music::getName).collect(Collectors.toList())));
-    }
     return response;
   }
 
@@ -76,5 +72,11 @@ public class GenreServiceImpl implements GenreService {
 
   private void checkIfGenreExists(UUID id) {
     if (!genreRepository.existsById(id)) throw new BusinessException("Boyle bir tarz mevcut degil");
+  }
+
+  private void checkIfGenreExistsByName(String name) {
+    if (genreRepository.existsByNameIgnoreCase(name)) {
+      throw new BusinessException("Boyle bir tur sistemde zaten kayitli");
+    }
   }
 }

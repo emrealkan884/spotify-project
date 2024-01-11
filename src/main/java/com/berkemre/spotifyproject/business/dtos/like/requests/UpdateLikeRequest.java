@@ -8,8 +8,8 @@ import lombok.NoArgsConstructor;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
 @Data
+@Builder
 public class UpdateLikeRequest {
   private UUID userId;
   private UUID musicId;

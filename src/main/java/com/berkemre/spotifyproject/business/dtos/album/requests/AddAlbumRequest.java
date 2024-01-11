@@ -9,8 +9,8 @@ import lombok.NoArgsConstructor;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
 @Data
+@Builder
 public class AddAlbumRequest {
   private String name;
   private LocalDate releaseDate;

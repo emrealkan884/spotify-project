@@ -6,14 +6,12 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Builder
-@Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Data
+@Builder
 public class GetAllLikesResponse {
-  // private GetUserResponse username;
-  // private GetMusicResponse music;
   private UUID id;
-  private String userName;
+  private String userUsername;
   private String musicName;
 }

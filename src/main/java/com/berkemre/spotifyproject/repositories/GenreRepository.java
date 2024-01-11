@@ -9,6 +9,9 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface GenreRepository extends JpaRepository<Genre, UUID> {
+  // Derivered Query Method
+  boolean existsByNameIgnoreCase(String name);
+
   @Query(value = "Select * from genres WHERE id = :id", nativeQuery = true)
   Genre getForByIdNative(@Param("id") UUID id);
 }

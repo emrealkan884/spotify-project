@@ -9,8 +9,8 @@ import lombok.NoArgsConstructor;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
 @Data
+@Builder
 public class GetAlbumResponse {
   private UUID id;
   private String name;

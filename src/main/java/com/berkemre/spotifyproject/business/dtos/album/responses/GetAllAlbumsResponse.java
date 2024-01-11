@@ -1,20 +1,18 @@
 package com.berkemre.spotifyproject.business.dtos.album.responses;
 
+import java.time.LocalDate;
+import java.util.UUID;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDate;
-import java.util.UUID;
-
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
 @Data
+@Builder
 public class GetAllAlbumsResponse {
-    private UUID id;
-    private String name;
-    private LocalDate releaseDate;
+  private UUID id;
+  private String name;
+  private LocalDate releaseDate;
 }
-

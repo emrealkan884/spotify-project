@@ -46,7 +46,6 @@ public class GenresController {
   @DeleteMapping("/{id}")
   @ResponseStatus(HttpStatus.NO_CONTENT)
   public void delete(@PathVariable UUID id) {
-
     genreService.delete(id);
   }
 }

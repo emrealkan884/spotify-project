@@ -6,12 +6,11 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Builder
-@Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Data
+@Builder
 public class GetAllArtistsResponse {
-  // private List<GetAllAlbumsResponse> albums;
   private UUID id;
   private String name;
 }

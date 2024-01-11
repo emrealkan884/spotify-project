@@ -1,17 +1,16 @@
 package com.berkemre.spotifyproject.business.dtos.playlist.responses;
 
-import com.berkemre.spotifyproject.entities.Music;
-import java.util.List;
+import java.util.UUID;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Data
 @Builder
 public class GetPlaylistResponse {
+  private UUID id;
   private String name;
-  private List<Music> musics;
 }

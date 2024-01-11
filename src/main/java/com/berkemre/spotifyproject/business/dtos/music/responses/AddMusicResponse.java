@@ -8,8 +8,8 @@ import lombok.NoArgsConstructor;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
 @Data
+@Builder
 public class AddMusicResponse {
 
   private UUID id;
@@ -17,8 +17,4 @@ public class AddMusicResponse {
   private String name;
 
   private String link;
-
-  private String artistName;
-
-  private String genreName;
 }

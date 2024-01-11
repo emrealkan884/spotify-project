@@ -2,7 +2,6 @@ package com.berkemre.spotifyproject.business.concretes;
 
 import com.berkemre.spotifyproject.business.abstracts.MusicService;
 import com.berkemre.spotifyproject.business.abstracts.PlaylistService;
-import com.berkemre.spotifyproject.business.abstracts.UserService;
 import com.berkemre.spotifyproject.business.dtos.playlist.requests.AddPlaylistRequest;
 import com.berkemre.spotifyproject.business.dtos.playlist.requests.UpdatePlaylistRequest;
 import com.berkemre.spotifyproject.business.dtos.playlist.responses.AddPlaylistResponse;
@@ -13,37 +12,35 @@ import com.berkemre.spotifyproject.core.exceptions.BusinessException;
 import com.berkemre.spotifyproject.entities.Music;
 import com.berkemre.spotifyproject.entities.Playlist;
 import com.berkemre.spotifyproject.repositories.PlaylistRepository;
-import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
 public class PlaylistServiceImpl implements PlaylistService {
   private final PlaylistRepository playlistRepository;
-  private final UserService userService;
   private final MusicService musicService;
+  private final ModelMapper modelMapper;
 
   @Override
   public AddPlaylistResponse add(AddPlaylistRequest request) {
-    Playlist playlist =
-        Playlist.builder()
-            .createdDate(LocalDate.now())
-            .user(userService.getForByIdNative(request.getUserId()))
-            .name(request.getName())
-            .build();
-    playlist = playlistRepository.save(playlist);
-    AddPlaylistResponse addPlaylistResponse =
-        AddPlaylistResponse.builder().name(playlist.getName()).build();
-    return addPlaylistResponse;
+    Playlist playlist = modelMapper.map(request, Playlist.class);
+    Playlist createdPlaylist = playlistRepository.save(playlist);
+    AddPlaylistResponse response = modelMapper.map(createdPlaylist, AddPlaylistResponse.class);
+    return response;
   }
 
   @Override
   public UpdatePlaylistResponse update(UUID id, UpdatePlaylistRequest request) {
-    return null;
+    Playlist playlist = modelMapper.map(request, Playlist.class);
+    playlist.setId(id);
+    Playlist updatedPlaylist = playlistRepository.save(playlist);
+    UpdatePlaylistResponse response =
+        modelMapper.map(updatedPlaylist, UpdatePlaylistResponse.class);
+    return response;
   }
 
   @Override
@@ -56,19 +53,17 @@ public class PlaylistServiceImpl implements PlaylistService {
   public GetPlaylistResponse getById(UUID id) {
     checkIfPlaylistExists(id);
     Playlist playlist = playlistRepository.findById(id).orElseThrow();
-    GetPlaylistResponse getPlaylistResponse =
-        GetPlaylistResponse.builder().name(playlist.getName()).musics(playlist.getMusics()).build();
-    return getPlaylistResponse;
+    GetPlaylistResponse response = modelMapper.map(playlist, GetPlaylistResponse.class);
+    return response;
   }
 
   @Override
   public List<GetAllPlaylistsResponse> getAll() {
     List<Playlist> playlists = playlistRepository.findAll();
-    List<GetAllPlaylistsResponse> response = new ArrayList<>();
-
-    for (Playlist playlist : playlists) {
-      response.add(new GetAllPlaylistsResponse(playlist.getId(), playlist.getName()));
-    }
+    List<GetAllPlaylistsResponse> response =
+        playlists.stream()
+            .map(playlist -> modelMapper.map(playlist, GetAllPlaylistsResponse.class))
+            .toList();
     return response;
   }
 
