@@ -19,4 +19,6 @@ public interface PlaylistService {
   GetPlaylistResponse getById(UUID id);
 
   List<GetAllPlaylistsResponse> getAll();
+
+  void addMusicsInPlaylist(UUID playlistId, UUID musicId);
 }

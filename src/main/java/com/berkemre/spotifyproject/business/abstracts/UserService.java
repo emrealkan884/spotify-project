@@ -1,19 +1,26 @@
 package com.berkemre.spotifyproject.business.abstracts;
 
+import com.berkemre.spotifyproject.business.dtos.user.requests.AddUserRequest;
+import com.berkemre.spotifyproject.business.dtos.user.requests.UpdateUserRequest;
+import com.berkemre.spotifyproject.business.dtos.user.responses.AddUserResponse;
+import com.berkemre.spotifyproject.business.dtos.user.responses.GetAllUsersResponse;
+import com.berkemre.spotifyproject.business.dtos.user.responses.GetUserResponse;
+import com.berkemre.spotifyproject.business.dtos.user.responses.UpdateUserResponse;
 import com.berkemre.spotifyproject.entities.User;
 import java.util.List;
 import java.util.UUID;
 
 public interface UserService {
-  User add(User request);
+  AddUserResponse add(AddUserRequest request);
 
-  User update(UUID id, User request);
+  UpdateUserResponse update(UUID id, UpdateUserRequest request);
 
   void delete(UUID id);
 
-  User getById(UUID id);
+  GetUserResponse getById(UUID id);
 
-  List<User> getAll();
+  List<GetAllUsersResponse> getAll();
 
   User getForByIdNative(UUID id);
+
 }

@@ -6,4 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface LikeRepository extends JpaRepository<Like, UUID> {}
+public interface LikeRepository extends JpaRepository<Like, UUID> {
+  // Derivered Query Method
+  boolean existsByUserIdAndMusicId(UUID userId, UUID musicId);
+}

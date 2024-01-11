@@ -20,5 +20,5 @@ public class AddMusicRequest {
 
   private float duration;
 
-  private UUID albumId;
+  private UUID albumId; // Requestlerede birden fazla id olursa, mapper kullandigimizda cakisabilir.
 }

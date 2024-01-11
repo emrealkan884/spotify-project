@@ -46,4 +46,9 @@ public class PlaylistsController {
   public void delete(@PathVariable UUID id) {
     playlistService.delete(id);
   }
+
+  @PutMapping("/addMusicInPlaylist")
+  public void addMusicsInPlaylist(@RequestParam UUID id, @RequestBody UUID musicId) {
+    playlistService.addMusicsInPlaylist(id, musicId);
+  }
 }

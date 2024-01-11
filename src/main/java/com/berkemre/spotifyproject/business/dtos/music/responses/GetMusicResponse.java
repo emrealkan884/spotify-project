@@ -18,8 +18,6 @@ public class GetMusicResponse {
 
   private String link;
 
-  private int numberOfLikes;
-
   private String photo;
 
   private float duration;

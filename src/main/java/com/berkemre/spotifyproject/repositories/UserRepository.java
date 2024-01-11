@@ -11,4 +11,5 @@ import org.springframework.stereotype.Repository;
 public interface UserRepository extends JpaRepository<User, UUID> {
   @Query(value = "Select * from users WHERE id = :id", nativeQuery = true)
   User getForByIdNative(@Param("id") UUID id);
+
 }

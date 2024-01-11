@@ -1,4 +1,4 @@
-package com.berkemre.spotifyproject.business.dtos.artist.responses;
+package com.berkemre.spotifyproject.business.dtos.user.responses;
 
 import java.util.UUID;
 import lombok.AllArgsConstructor;
@@ -6,12 +6,13 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Builder
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class GetAllArtistsResponse {
-  // private List<GetAllAlbumsResponse> albums;
+@Builder
+public class GetAllUsersResponse {
   private UUID id;
-  private String name;
+  private String username;
+  private String firstName;
+  private String lastName;
 }

@@ -26,8 +26,6 @@ public class Music {
 
   private String link;
 
-  private int numberOfLikes;
-
   private String photo;
 
   private float duration;

@@ -43,7 +43,7 @@ public class GenreServiceImpl implements GenreService {
   @Override
   public GetGenreResponse getById(UUID id) {
     checkIfGenreExists(id);
-    Genre genre = genreRepository.getReferenceById(id);
+    Genre genre = genreRepository.findById(id).orElseThrow();
     GetGenreResponse getGenreResponse =
         GetGenreResponse.builder()
             .name(genre.getName())
@@ -56,17 +56,16 @@ public class GenreServiceImpl implements GenreService {
   @Override
   public List<GetAllGenresResponse> getAll() {
     List<Genre> genres = genreRepository.findAll();
-    GetAllGenresResponse getAllGenreResponse;
-    List<GetAllGenresResponse> responses = new ArrayList<>();
+    List<GetAllGenresResponse> response = new ArrayList<>();
+
     for (Genre genre : genres) {
-      getAllGenreResponse = new GetAllGenresResponse();
-      getAllGenreResponse.setId(genre.getId());
-      getAllGenreResponse.setName(genre.getName());
-      getAllGenreResponse.setMusicsName(
-          genre.getMusics().stream().map(Music::getName).collect(Collectors.toList()));
-      responses.add(getAllGenreResponse);
+      response.add(
+          new GetAllGenresResponse(
+              genre.getId(),
+              genre.getName(),
+              genre.getMusics().stream().map(Music::getName).collect(Collectors.toList())));
     }
-    return responses;
+    return response;
   }
 
   @Override

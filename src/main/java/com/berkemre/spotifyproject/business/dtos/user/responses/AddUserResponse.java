@@ -1,4 +1,4 @@
-package com.berkemre.spotifyproject.business.dtos.user.requests;
+package com.berkemre.spotifyproject.business.dtos.user.responses;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,9 +9,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class AddUserRequest {
+public class AddUserResponse {
   private String username;
   private String firstName;
   private String lastName;
-  private String password;
 }

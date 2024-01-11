@@ -20,5 +20,5 @@ public interface AlbumRepository extends JpaRepository<Album, UUID> {
           "Select new com.berkemre.spotifyproject.business.dtos.album.responses.GetAllAlbumsResponse"
               + "(a.id,a.name,a.releaseDate) from Album a "
               + "Where a.artist = :artist")
-  List<GetAllAlbumsResponse> getForByArtistId(Artist artist);
+  List<GetAllAlbumsResponse> getForByArtist(Artist artist);
 }

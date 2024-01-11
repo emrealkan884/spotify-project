@@ -56,7 +56,7 @@ public class ArtistServiceImpl implements ArtistService {
   @Override
   public GetArtistResponse getById(UUID id) {
     checkIfArtistExists(id);
-    Artist artist = artistRepository.getReferenceById(id);
+    Artist artist = artistRepository.findById(id).orElseThrow();
     GetArtistResponse getArtistResponse =
         GetArtistResponse.builder().name(artist.getName()).build();
     return getArtistResponse;
@@ -64,15 +64,13 @@ public class ArtistServiceImpl implements ArtistService {
 
   @Override
   public List<GetAllArtistsResponse> getAll() {
-    List<GetAllArtistsResponse> responses = new ArrayList<>();
-    GetAllArtistsResponse getAllArtistsResponse;
+    List<GetAllArtistsResponse> response = new ArrayList<>();
     List<Artist> artists = artistRepository.findAll();
+
     for (Artist artist : artists) {
-      getAllArtistsResponse = new GetAllArtistsResponse();
-      getAllArtistsResponse.setName(artist.getName());
-      responses.add(getAllArtistsResponse);
+      response.add(new GetAllArtistsResponse(artist.getId(), artist.getName()));
     }
-    return responses;
+    return response;
   }
 
   @Override

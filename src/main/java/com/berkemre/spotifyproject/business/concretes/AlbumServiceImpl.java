@@ -70,7 +70,7 @@ public class AlbumServiceImpl implements AlbumService {
   @Override
   public GetAlbumResponse getById(UUID id) {
     checkIfAlbumExists(id);
-    Album album = albumRepository.getReferenceById(id);
+    Album album = albumRepository.findById(id).orElseThrow();
     GetAlbumResponse getAlbumResponse =
         GetAlbumResponse.builder()
             .releaseDate(album.getReleaseDate())
@@ -83,14 +83,11 @@ public class AlbumServiceImpl implements AlbumService {
   @Override
   public List<GetAllAlbumsResponse> getAll() {
     List<Album> albums = albumRepository.findAll();
-    GetAllAlbumsResponse getAlbumResponse;
     List<GetAllAlbumsResponse> responses = new ArrayList<>();
+
     for (Album album : albums) {
-      getAlbumResponse = new GetAllAlbumsResponse();
-      getAlbumResponse.setId(album.getId());
-      getAlbumResponse.setName(album.getName());
-      getAlbumResponse.setReleaseDate(album.getReleaseDate());
-      responses.add(getAlbumResponse);
+      responses.add(
+          new GetAllAlbumsResponse(album.getId(), album.getName(), album.getReleaseDate()));
     }
     return responses;
   }
@@ -103,7 +100,7 @@ public class AlbumServiceImpl implements AlbumService {
 
   @Override
   public List<GetAllAlbumsResponse> getForByArtist(Artist artist) {
-    return albumRepository.getForByArtistId(artist);
+    return albumRepository.getForByArtist(artist);
   }
 
   private void checkIfAlbumExists(UUID id) {
