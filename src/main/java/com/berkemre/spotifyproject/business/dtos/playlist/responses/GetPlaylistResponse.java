@@ -13,4 +13,5 @@ import lombok.NoArgsConstructor;
 public class GetPlaylistResponse {
   private UUID id;
   private String name;
+  private String userUsername;
 }

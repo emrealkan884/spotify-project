@@ -48,4 +48,9 @@ public class MusicsController {
 
     musicService.delete(id);
   }
+
+  @GetMapping(("/countLikes"))
+  public int countLikesById(@RequestParam UUID id) {
+    return musicService.countLikesById(id);
+  }
 }

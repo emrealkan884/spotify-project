@@ -1,7 +1,7 @@
 package com.berkemre.spotifyproject.entities;
 
+import com.berkemre.spotifyproject.core.entities.BaseEntity;
 import jakarta.persistence.*;
-import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 import lombok.AllArgsConstructor;
@@ -15,14 +15,9 @@ import lombok.NoArgsConstructor;
 @Data
 @Builder
 @Table(name = "musics")
-public class Music {
-  @Id
-  @GeneratedValue(strategy = GenerationType.UUID)
-  private UUID id;
+public class Music extends BaseEntity<UUID> {
 
   private String name;
-
-  private LocalDate createdDate;
 
   private String link;
 
@@ -53,4 +48,8 @@ public class Music {
   @ManyToOne
   @JoinColumn(name = "genre_id")
   private Genre genre;
+
+  public int getLikeCount() {
+    return likes.size();
+  }
 }

@@ -7,9 +7,10 @@ import com.berkemre.spotifyproject.business.dtos.like.responses.AddLikeResponse;
 import com.berkemre.spotifyproject.business.dtos.like.responses.GetAllLikesResponse;
 import com.berkemre.spotifyproject.business.dtos.like.responses.GetLikeResponse;
 import com.berkemre.spotifyproject.business.dtos.like.responses.UpdateLikeResponse;
-import com.berkemre.spotifyproject.core.exceptions.BusinessException;
+import com.berkemre.spotifyproject.core.exceptions.types.BusinessException;
 import com.berkemre.spotifyproject.entities.Like;
 import com.berkemre.spotifyproject.repositories.LikeRepository;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 import lombok.RequiredArgsConstructor;
@@ -26,6 +27,7 @@ public class LikeServiceImpl implements LikeService {
   public AddLikeResponse add(AddLikeRequest request) {
     Like like = modelMapper.map(request, Like.class);
     like.setId(UUID.randomUUID());
+    like.setCreatedDate(LocalDateTime.now());
     Like createdLike = likeRepository.save(like);
     AddLikeResponse response = modelMapper.map(createdLike, AddLikeResponse.class);
     return response;
@@ -36,6 +38,7 @@ public class LikeServiceImpl implements LikeService {
     checkIfLikeExists(id);
     Like like = modelMapper.map(request, Like.class);
     like.setId(id);
+    like.setUpdatedDate(LocalDateTime.now());
     Like updatedLike = likeRepository.save(like);
     UpdateLikeResponse response = modelMapper.map(updatedLike, UpdateLikeResponse.class);
     return response;

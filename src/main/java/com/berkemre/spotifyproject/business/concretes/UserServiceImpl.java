@@ -7,7 +7,7 @@ import com.berkemre.spotifyproject.business.dtos.user.responses.AddUserResponse;
 import com.berkemre.spotifyproject.business.dtos.user.responses.GetAllUsersResponse;
 import com.berkemre.spotifyproject.business.dtos.user.responses.GetUserResponse;
 import com.berkemre.spotifyproject.business.dtos.user.responses.UpdateUserResponse;
-import com.berkemre.spotifyproject.core.exceptions.BusinessException;
+import com.berkemre.spotifyproject.core.exceptions.types.BusinessException;
 import com.berkemre.spotifyproject.entities.User;
 import com.berkemre.spotifyproject.repositories.UserRepository;
 import java.util.List;

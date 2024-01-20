@@ -7,9 +7,10 @@ import com.berkemre.spotifyproject.business.dtos.artist.responses.AddArtistRespo
 import com.berkemre.spotifyproject.business.dtos.artist.responses.GetAllArtistsResponse;
 import com.berkemre.spotifyproject.business.dtos.artist.responses.GetArtistResponse;
 import com.berkemre.spotifyproject.business.dtos.artist.responses.UpdateArtistResponse;
-import com.berkemre.spotifyproject.core.exceptions.BusinessException;
+import com.berkemre.spotifyproject.core.exceptions.types.BusinessException;
 import com.berkemre.spotifyproject.entities.Artist;
 import com.berkemre.spotifyproject.repositories.ArtistRepository;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 import lombok.RequiredArgsConstructor;
@@ -26,6 +27,7 @@ public class ArtistServiceImpl implements ArtistService {
   public AddArtistResponse add(AddArtistRequest request) {
     Artist artist = modelMapper.map(request, Artist.class);
     artist.setId(UUID.randomUUID());
+    artist.setCreatedDate(LocalDateTime.now());
     Artist createdArtist = artistRepository.save(artist);
     AddArtistResponse response = modelMapper.map(createdArtist, AddArtistResponse.class);
     return response;
@@ -36,6 +38,7 @@ public class ArtistServiceImpl implements ArtistService {
     checkIfArtistExists(id);
     Artist artist = modelMapper.map(request, Artist.class);
     artist.setId(id);
+    artist.setUpdatedDate(LocalDateTime.now());
     Artist updatedArtist = artistRepository.save(artist);
     UpdateArtistResponse response = modelMapper.map(updatedArtist, UpdateArtistResponse.class);
     return response;

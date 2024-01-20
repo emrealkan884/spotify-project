@@ -1,5 +1,6 @@
 package com.berkemre.spotifyproject.entities;
 
+import com.berkemre.spotifyproject.core.entities.BaseEntity;
 import jakarta.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
@@ -15,13 +16,10 @@ import lombok.NoArgsConstructor;
 @Data
 @Builder
 @Table(name = "albums")
-public class Album {
-
-  @Id
-  @GeneratedValue(strategy = GenerationType.UUID)
-  private UUID id;
+public class Album extends BaseEntity<UUID> {
 
   private String name;
+
   private LocalDate releaseDate;
 
   @ManyToOne

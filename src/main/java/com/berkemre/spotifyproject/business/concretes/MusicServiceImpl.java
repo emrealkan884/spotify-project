@@ -7,9 +7,10 @@ import com.berkemre.spotifyproject.business.dtos.music.responses.AddMusicRespons
 import com.berkemre.spotifyproject.business.dtos.music.responses.GetAllMusicsResponse;
 import com.berkemre.spotifyproject.business.dtos.music.responses.GetMusicResponse;
 import com.berkemre.spotifyproject.business.dtos.music.responses.UpdateMusicResponse;
-import com.berkemre.spotifyproject.core.exceptions.BusinessException;
+import com.berkemre.spotifyproject.core.exceptions.types.BusinessException;
 import com.berkemre.spotifyproject.entities.Music;
 import com.berkemre.spotifyproject.repositories.MusicRepository;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 import lombok.RequiredArgsConstructor;
@@ -25,6 +26,8 @@ public class MusicServiceImpl implements MusicService {
   @Override
   public AddMusicResponse add(AddMusicRequest request) {
     Music music = modelMapper.map(request, Music.class);
+    music.setId(UUID.randomUUID());
+    music.setCreatedDate(LocalDateTime.now());
     Music createdMusic = musicRepository.save(music);
     AddMusicResponse response = modelMapper.map(createdMusic, AddMusicResponse.class);
     return response;
@@ -35,6 +38,7 @@ public class MusicServiceImpl implements MusicService {
     checkIfMusicExists(id);
     Music music = modelMapper.map(request, Music.class);
     music.setId(id);
+    music.setUpdatedDate(LocalDateTime.now());
     Music updatedMusic = musicRepository.save(music);
     UpdateMusicResponse response = modelMapper.map(updatedMusic, UpdateMusicResponse.class);
     return response;
@@ -74,6 +78,12 @@ public class MusicServiceImpl implements MusicService {
   public Music getForByIdNative(UUID id) {
     checkIfMusicExists(id);
     return musicRepository.getForByIdNative(id);
+  }
+
+  @Override
+  public int countLikesById(UUID id) {
+    checkIfMusicExists(id);
+    return musicRepository.findById(id).orElseThrow().getLikeCount();
   }
 
   private void checkIfMusicExists(UUID id) {

@@ -7,10 +7,12 @@ import com.berkemre.spotifyproject.business.dtos.album.responses.AddAlbumRespons
 import com.berkemre.spotifyproject.business.dtos.album.responses.GetAlbumResponse;
 import com.berkemre.spotifyproject.business.dtos.album.responses.GetAllAlbumsResponse;
 import com.berkemre.spotifyproject.business.dtos.album.responses.UpdateAlbumResponse;
-import com.berkemre.spotifyproject.core.exceptions.BusinessException;
+import com.berkemre.spotifyproject.core.exceptions.types.BusinessException;
 import com.berkemre.spotifyproject.entities.Album;
 import com.berkemre.spotifyproject.entities.Artist;
 import com.berkemre.spotifyproject.repositories.AlbumRepository;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 import lombok.RequiredArgsConstructor;
@@ -27,6 +29,8 @@ public class AlbumServiceImpl implements AlbumService {
   public AddAlbumResponse add(AddAlbumRequest request) {
     Album album = modelMapper.map(request, Album.class);
     album.setId(UUID.randomUUID());
+    album.setReleaseDate(LocalDate.now());
+    album.setCreatedDate(LocalDateTime.now());
     Album createdAlbum = albumRepository.save(album);
     AddAlbumResponse response = modelMapper.map(createdAlbum, AddAlbumResponse.class);
     return response;
@@ -37,6 +41,7 @@ public class AlbumServiceImpl implements AlbumService {
     checkIfAlbumExists(id);
     Album album = modelMapper.map(request, Album.class);
     album.setId(id);
+    album.setUpdatedDate(LocalDateTime.now());
     Album updatedAlbum = albumRepository.save(album);
     UpdateAlbumResponse response = modelMapper.map(updatedAlbum, UpdateAlbumResponse.class);
     return response;

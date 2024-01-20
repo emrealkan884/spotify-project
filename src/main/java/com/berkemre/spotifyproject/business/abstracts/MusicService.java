@@ -24,4 +24,6 @@ public interface MusicService {
   List<Music> getForByIdsNative(List<UUID> ids);
 
   Music getForByIdNative(UUID id);
+
+  int countLikesById(UUID id);
 }

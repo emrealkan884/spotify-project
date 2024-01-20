@@ -1,6 +1,5 @@
 package com.berkemre.spotifyproject.business.dtos.album.requests;
 
-import java.time.LocalDate;
 import java.util.UUID;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -13,6 +12,5 @@ import lombok.NoArgsConstructor;
 @Builder
 public class AddAlbumRequest {
   private String name;
-  private LocalDate releaseDate;
   private UUID artistId;
 }

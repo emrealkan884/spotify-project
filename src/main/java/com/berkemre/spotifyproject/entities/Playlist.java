@@ -1,7 +1,7 @@
 package com.berkemre.spotifyproject.entities;
 
+import com.berkemre.spotifyproject.core.entities.BaseEntity;
 import jakarta.persistence.*;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -16,15 +16,9 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "playlists")
 @Builder
-public class Playlist {
-
-  @Id
-  @GeneratedValue(strategy = GenerationType.UUID)
-  private UUID id;
+public class Playlist extends BaseEntity<UUID> {
 
   private String name;
-
-  private LocalDate createdDate;
 
   @ManyToMany(mappedBy = "playlists", fetch = FetchType.LAZY)
   // @JsonBackReference , Request Response olmasa donguyu kirmak icin kullanacaktik.

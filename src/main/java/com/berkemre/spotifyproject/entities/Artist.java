@@ -1,5 +1,6 @@
 package com.berkemre.spotifyproject.entities;
 
+import com.berkemre.spotifyproject.core.entities.BaseEntity;
 import jakarta.persistence.*;
 import java.util.List;
 import java.util.UUID;
@@ -14,11 +15,7 @@ import lombok.NoArgsConstructor;
 @Data
 @Builder
 @Table(name = "artists")
-public class Artist {
-
-  @Id
-  @GeneratedValue(strategy = GenerationType.UUID)
-  private UUID id;
+public class Artist extends BaseEntity<UUID> {
 
   private String name;
 

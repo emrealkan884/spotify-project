@@ -7,9 +7,10 @@ import com.berkemre.spotifyproject.business.dtos.genre.responses.AddGenreRespons
 import com.berkemre.spotifyproject.business.dtos.genre.responses.GetAllGenresResponse;
 import com.berkemre.spotifyproject.business.dtos.genre.responses.GetGenreResponse;
 import com.berkemre.spotifyproject.business.dtos.genre.responses.UpdateGenreResponse;
-import com.berkemre.spotifyproject.core.exceptions.BusinessException;
+import com.berkemre.spotifyproject.core.exceptions.types.BusinessException;
 import com.berkemre.spotifyproject.entities.Genre;
 import com.berkemre.spotifyproject.repositories.GenreRepository;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 import lombok.RequiredArgsConstructor;
@@ -27,6 +28,7 @@ public class GenreServiceImpl implements GenreService {
     checkIfGenreExistsByName(request.getName());
     Genre genre = modelMapper.map(request, Genre.class);
     genre.setId(UUID.randomUUID()); // Dto'muzda birden fazla id varsa mapper in kafasi karisiyor.
+    genre.setCreatedDate(LocalDateTime.now());
     Genre createdGenre = genreRepository.save(genre);
     AddGenreResponse response = modelMapper.map(createdGenre, AddGenreResponse.class);
     return response;
@@ -37,6 +39,7 @@ public class GenreServiceImpl implements GenreService {
     checkIfGenreExists(id);
     Genre genre = modelMapper.map(request, Genre.class);
     genre.setId(id);
+    genre.setUpdatedDate(LocalDateTime.now());
     Genre updatedGenre = genreRepository.save(genre);
     UpdateGenreResponse response = modelMapper.map(updatedGenre, UpdateGenreResponse.class);
     return response;

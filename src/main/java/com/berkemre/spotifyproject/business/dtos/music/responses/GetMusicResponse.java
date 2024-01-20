@@ -22,7 +22,9 @@ public class GetMusicResponse {
 
   private float duration;
 
-  private String artistName;
+  private String albumArtistName;
+
+  private String albumName;
 
   private String genreName;
 }

@@ -8,10 +8,11 @@ import com.berkemre.spotifyproject.business.dtos.playlist.responses.AddPlaylistR
 import com.berkemre.spotifyproject.business.dtos.playlist.responses.GetAllPlaylistsResponse;
 import com.berkemre.spotifyproject.business.dtos.playlist.responses.GetPlaylistResponse;
 import com.berkemre.spotifyproject.business.dtos.playlist.responses.UpdatePlaylistResponse;
-import com.berkemre.spotifyproject.core.exceptions.BusinessException;
+import com.berkemre.spotifyproject.core.exceptions.types.BusinessException;
 import com.berkemre.spotifyproject.entities.Music;
 import com.berkemre.spotifyproject.entities.Playlist;
 import com.berkemre.spotifyproject.repositories.PlaylistRepository;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 import lombok.RequiredArgsConstructor;
@@ -28,6 +29,7 @@ public class PlaylistServiceImpl implements PlaylistService {
   @Override
   public AddPlaylistResponse add(AddPlaylistRequest request) {
     Playlist playlist = modelMapper.map(request, Playlist.class);
+    playlist.setCreatedDate(LocalDateTime.now());
     Playlist createdPlaylist = playlistRepository.save(playlist);
     AddPlaylistResponse response = modelMapper.map(createdPlaylist, AddPlaylistResponse.class);
     return response;
@@ -37,6 +39,7 @@ public class PlaylistServiceImpl implements PlaylistService {
   public UpdatePlaylistResponse update(UUID id, UpdatePlaylistRequest request) {
     Playlist playlist = modelMapper.map(request, Playlist.class);
     playlist.setId(id);
+    playlist.setUpdatedDate(LocalDateTime.now());
     Playlist updatedPlaylist = playlistRepository.save(playlist);
     UpdatePlaylistResponse response =
         modelMapper.map(updatedPlaylist, UpdatePlaylistResponse.class);

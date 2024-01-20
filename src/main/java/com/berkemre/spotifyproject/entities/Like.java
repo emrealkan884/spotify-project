@@ -1,5 +1,6 @@
 package com.berkemre.spotifyproject.entities;
 
+import com.berkemre.spotifyproject.core.entities.BaseEntity;
 import jakarta.persistence.*;
 import java.time.LocalDate;
 import java.util.UUID;
@@ -14,10 +15,7 @@ import lombok.NoArgsConstructor;
 @Data
 @Builder
 @Table(name = "likes")
-public class Like {
-  @Id
-  @GeneratedValue(strategy = GenerationType.UUID)
-  private UUID id;
+public class Like extends BaseEntity<UUID> {
 
   private LocalDate date = LocalDate.now();
 
